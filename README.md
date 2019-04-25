@@ -4,8 +4,8 @@
 ## Introduction
 
 OnlineDocs brings your documents to life with smart editing and styling tools to help you easily format text and paragraphs
-Features include:
 
+Features include:
  * Check out timeline
 
 
