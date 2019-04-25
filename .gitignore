@@ -1,5 +1,8 @@
-# idea configuration directory
+# idea configuration files
 .idea
+*.iml
+.gradle
+.DS_Store
 
 # CMake
 cmake-build-*/
