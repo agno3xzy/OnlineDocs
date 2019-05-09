@@ -1,12 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
   User: agno3
-  Date: 2019/4/25
-  Time: 16:11
+  Date: 2019/5/9
+  Time: 15:14
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
 <html>
 <head>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -20,31 +19,14 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>欢迎页面</title>
+    <title>登陆状态</title>
 </head>
 <body>
-<h1 style="text-align: center;margin-top: 50px;margin-bottom: 200px">Welcme to OnlineDocs！</h1>
-<div class="mx-auto" style="width: 500px;">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm">
-
-                <form action="mySinginAction.action" method="post">
-                    <button type="submit" class="btn btn-secondary btn-lg" value="Signin" name="signin">
-                        Sign In
-                    </button>
-                </form>
-
-            </div>
-            <div class="col-sm">
-                <form action="mySingupAction.action" method="post">
-                    <button type="submit" class="btn btn-secondary btn-lg" value="Signup" name="signup">
-                        Sign Up
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
+<div class="alert alert-success" role="alert" style="text-align: center">
+    <h4 class="alert-heading">Well done!</h4>
+    <p>Aww yeah, you have successfully login in!</p>
+    <hr>
+    <p class="mb-0">Start OnlineDocs Now!</p>
 </div>
 </body>
 </html>

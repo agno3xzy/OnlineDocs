@@ -1,12 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
   User: agno3
-  Date: 2019/4/25
-  Time: 16:11
+  Date: 2019/5/9
+  Time: 16:36
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
 <html>
 <head>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -20,31 +19,30 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>欢迎页面</title>
+    <title>用户注册</title>
 </head>
 <body>
-<h1 style="text-align: center;margin-top: 50px;margin-bottom: 200px">Welcme to OnlineDocs！</h1>
+<h1 style="text-align: center;margin-top: 50px;margin-bottom: 200px">OnlineDocs 用户登录</h1>
 <div class="mx-auto" style="width: 500px;">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm">
-
-                <form action="mySinginAction.action" method="post">
-                    <button type="submit" class="btn btn-secondary btn-lg" value="Signin" name="signin">
-                        Sign In
-                    </button>
-                </form>
-
-            </div>
-            <div class="col-sm">
-                <form action="mySingupAction.action" method="post">
-                    <button type="submit" class="btn btn-secondary btn-lg" value="Signup" name="signup">
-                        Sign Up
-                    </button>
-                </form>
+    <form>
+        <div class="form-group">
+            <label for="formGroupExampleInput">请输入您的用户名：</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">请输入您的密码</label>
+            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">请再次输入您的密码</label>
+            <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="Another input">
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Sign Up</button>
             </div>
         </div>
-    </div>
+    </form>
 </div>
 </body>
 </html>
