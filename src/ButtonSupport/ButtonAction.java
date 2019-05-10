@@ -5,7 +5,7 @@ import com.opensymphony.xwork2.ActionSupport;
 此处为按钮控制类，所有
 的跳转按钮逻辑都写于此
         */
-public class ButtionAction extends ActionSupport {
+public class ButtonAction extends ActionSupport {
     private boolean signin;
     private boolean signup;
     public void setSignin(boolean signin) {

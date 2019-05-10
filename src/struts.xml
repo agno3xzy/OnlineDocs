@@ -10,11 +10,10 @@
             <result name="success">/signin_result.jsp</result>
             <result name="login">/index.jsp</result>
         </action>
-
-        <action name="mySigninAction" class="ButtonSupport.ButtionAction" method="signin">
+        <action name="mySigninAction" class="ButtonSupport.ButtonAction" method="signin">
             <result>/signin.jsp</result>
         </action>
-        <action name="mySignupAction" class="ButtonSupport.ButtionAction" method="signup">
+        <action name="mySignupAction" class="ButtonSupport.ButtonAction" method="signup">
             <result>/signup.jsp</result>
         </action>
     </package>
