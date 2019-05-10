@@ -29,7 +29,7 @@
         <div class="row">
             <div class="col-sm">
 
-                <form action="mySinginAction.action" method="post">
+                <form action="mySigninAction.action" method="post">
                     <button type="submit" class="btn btn-secondary btn-lg" value="Signin" name="signin">
                         Sign In
                     </button>
@@ -37,7 +37,7 @@
 
             </div>
             <div class="col-sm">
-                <form action="mySingupAction.action" method="post">
+                <form action="mySignupAction.action" method="post">
                     <button type="submit" class="btn btn-secondary btn-lg" value="Signup" name="signup">
                         Sign Up
                     </button>
