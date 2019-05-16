@@ -8,7 +8,11 @@
     <package name="default" namespace="/" extends="struts-default">
         <action name="Signin" class="Registration.SigninAction">
             <result name="success">/signin_result.jsp</result>
-            <result name="login">/index.jsp</result>
+            <result name="error">/index.jsp</result>
+        </action>
+        <action name="Signup" class="Registration.SignupAction">
+            <result name="success">/signin_result.jsp</result>
+            <result name="error">/index.jsp</result>
         </action>
         <action name="mySigninAction" class="ButtonSupport.ButtonAction" method="signin">
             <result>/signin.jsp</result>

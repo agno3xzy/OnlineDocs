@@ -28,7 +28,6 @@
     <div class="container">
         <div class="row">
             <div class="col-sm">
-
                 <form action="mySigninAction.action" method="post">
                     <button type="submit" class="btn btn-secondary btn-lg" value="Signin" name="signin">
                         Sign In

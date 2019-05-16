@@ -29,9 +29,9 @@
     <form action="Signin.action" method="post">
 
         <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+            <label for="inputUsername3" class="col-sm-2 col-form-label">Username</label>
             <div class="col-sm-10">
-                <input type="email" name="username" class="form-control" id="inputEmail3" placeholder="Email">
+                <input type="text" name="username" class="form-control" id="inputUsername3" placeholder="Username">
             </div>
         </div>
         <div class="form-group row">

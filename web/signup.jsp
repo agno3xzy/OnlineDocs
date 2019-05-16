@@ -22,16 +22,16 @@
     <title>用户注册</title>
 </head>
 <body>
-<h1 style="text-align: center;margin-top: 50px;margin-bottom: 200px">OnlineDocs 用户登录</h1>
+<h1 style="text-align: center;margin-top: 50px;margin-bottom: 200px">OnlineDocs 用户注册</h1>
 <div class="mx-auto" style="width: 500px;">
-    <form>
+    <form action="Signup.action" method="post">
         <div class="form-group">
             <label for="formGroupExampleInput">请输入您的用户名：</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+            <input type="text" name="username" class="form-control" id="formGroupExampleInput" placeholder="Example input">
         </div>
         <div class="form-group">
             <label for="formGroupExampleInput2">请输入您的密码</label>
-            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+            <input type="text" name="password" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
         </div>
         <div class="form-group">
             <label for="formGroupExampleInput2">请再次输入您的密码</label>
