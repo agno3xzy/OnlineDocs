@@ -32,13 +32,13 @@
         <div class="form-group row">
             <label for="username" class="col-sm-2 col-form-label">Username</label>
             <div class="col-sm-10">
-                <input type="text" name="username" class="form-control" id="username" placeholder="Username">
+                <input type="text" name="username" class="form-control" id="username" placeholder="Username" required="true">
             </div>
         </div>
         <div class="form-group row">
             <label for="password" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
-                <input type="password" name="password" class="form-control" id="password" placeholder="Password" onblur="checklogin()">
+                <input type="password" name="password" class="form-control" id="password" placeholder="Password" onblur="checklogin()" required="true">
             </div>
         </div>
         <div class="form-group row">
@@ -52,7 +52,7 @@
 <script type="text/javascript">
     function checklogin(){
         var xhr = new XMLHttpRequest();
-        var urlString = "/OnlineDocs/passwordCheck.action?username="
+        var urlString = "passwordCheck.action?username="
             + document.getElementById("username").value;
         xhr.open("post",urlString,true);
         xhr.send(null);
@@ -63,7 +63,8 @@
                     console.log(xhr.responseText);
                     console.log(document.getElementById("password").value);
                     if(xhr.responseText == "") {
-                        flag = false;
+                        document.getElementById("alert").style.visibility = "visible";
+                        $("#alert").html("用户名或密码错误");
                     } else {
                         if(xhr.responseText== document.getElementById("password").value)
                         {
@@ -71,7 +72,7 @@
                         } else
                         {
                             document.getElementById("alert").style.visibility = "visible";
-                            $("#alert").html("用户名或密s码错误");
+                            $("#alert").html("用户名或密码错误");
                         }
                     }
                 }

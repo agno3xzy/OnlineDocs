@@ -66,7 +66,7 @@
     }
     function checkUsernameExist() {
         var xhr = new XMLHttpRequest();
-        var urlString = "/OnlineDocs/usernameCheck.action?username="
+        var urlString = "usernameCheck.action?username="
         + document.getElementById("username").value;
         xhr.open("post",urlString,true);
         xhr.send(null);
