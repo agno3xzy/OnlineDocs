@@ -7,10 +7,10 @@
 <struts>
     <package name="default" namespace="/" extends="struts-default">
         <action name="Signin" class="Registration.SigninAction">
-            <result name="success">/signin_result.jsp</result>
+            <result name="success">/document_manage.jsp</result>
         </action>
         <action name="Signup" class="Registration.SignupAction">
-            <result name="success">/signin_result.jsp</result>
+            <result name="success">/document_manage.jsp</result>
             <result name="error">/signup.jsp</result>
         </action>
         <action name="mySigninAction" class="ButtonSupport.ButtonAction" method="signin">
@@ -21,7 +21,7 @@
         </action>
         <action name="usernameCheck" class="Registration.CheckSignupAction"></action>
         <action name="passwordCheck" class="Registration.CheckSigninAction"></action>
-<action name="downloadAction" class="File.DownloadAction">
+        <action name="downloadAction" class="File.DownloadAction">
             <result name="success" type="stream">
                 <param name="contentType">application/x-download</param>
                 <param name="inputName">inputStream</param>
@@ -36,18 +36,12 @@
             <result>/document_manage.jsp</result>
         </action>
         <action name="uploadAction" class="File.UploadAction">
-            <!-- 指定（限制）上传文件的类型，定义局部拦截器，修改默认拦截器的属性
-                "fileUpload.maximumSize" ：限制上传最大的文件大小。
-                "fileUpload.allowedTypes"：允许上传文件的类型。
-                "fileUpload.allowedExtensions"：允许上传文件的可扩展文件类型。 -->
             <interceptor-ref name="defaultStack">
                 <param name="fileUpload.maximumSize">500000000</param>
                 <param name="fileUpload.allowedTypes">text/plain,application/msword</param>
                 <param name="fileUpload.allowedExtensions">.txt,.docx</param>
             </interceptor-ref>
-
             <result>/document_manage.jsp</result>
-            <!-- 出现错误自动会返回input结果，进入结果视图 -->
             <result name="input" >/upload_fail.jsp</result>
         </action>
     </package>
