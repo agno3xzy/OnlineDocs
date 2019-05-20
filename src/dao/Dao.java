@@ -4,9 +4,9 @@ import java.sql.*;
 
 public class Dao {
     public Connection getConnection(){
-        String url = "jdbc:mysql://localhost:3306/OnlineDocs";
+        String url = "jdbc:mysql://localhost:3306/OnlineDocs?serverTimezone=GMT%2B8";
         String username = "root";
-        String password = "Lyy19980122";
+        String password = "caonima250";
         Connection conn = null;
         try
         {
