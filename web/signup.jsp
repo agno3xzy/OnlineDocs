@@ -24,25 +24,68 @@
 <body>
 <h1 style="text-align: center;margin-top: 50px;margin-bottom: 200px">OnlineDocs 用户注册</h1>
 <div class="mx-auto" style="width: 500px;">
+    <div class="alert alert-danger" role="alert" id="alert" style="visibility:hidden;">
+    </div>
     <form action="Signup.action" method="post">
         <div class="form-group">
-            <label for="formGroupExampleInput">请输入您的用户名：</label>
-            <input type="text" name="username" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+            <label for="username">请输入您的用户名：</label>
+            <input type="text" name="username" class="form-control" id="username" placeholder="Example input" required="true" onblur="checkUsernameExist()">
         </div>
         <div class="form-group">
-            <label for="formGroupExampleInput2">请输入您的密码</label>
-            <input type="text" name="password" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+            <label for="password">请输入您的密码</label>
+            <input type="password" name="password" class="form-control" id="password" placeholder="Another input" required="true">
         </div>
         <div class="form-group">
-            <label for="formGroupExampleInput2">请再次输入您的密码</label>
-            <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="Another input">
+            <label for="confirmpassword">请再次输入您的密码</label>
+            <input type="password" class="form-control" id="confirmpassword" placeholder="Another input" required="true">
         </div>
         <div class="form-group row">
             <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary">Sign Up</button>
+                <button type="submit" class="btn btn-primary" onclick="return validate()">Sign Up</button>
             </div>
         </div>
     </form>
 </div>
+
+    <script type="text/javascript">
+    function validate(){
+    var word1= document.getElementById("password").value;
+    var word2 = document.getElementById("confirmpassword").value;
+    if(word1 != word2){
+      document.getElementById("alert").style.visibility = "visible";
+      $("#alert").html("两次输入密码不一致!");
+      document.getElementById("confirmpassword").focus();
+      return false;
+    }
+    //如果此时警告框还存在 说明注册信息有问题 不提交
+    if(document.getElementById("alert").style.visibility == "visible")
+    {
+        return false;
+    }
+    return true;
+    }
+    function checkUsernameExist() {
+        var xhr = new XMLHttpRequest();
+        var urlString = "/OnlineDocs/usernameCheck.action?username="
+        + document.getElementById("username").value;
+        xhr.open("post",urlString,true);
+        xhr.send(null);
+
+        //检查响应状态
+        xhr.onreadystatechange = function() {
+            if(xhr.readyState == 4) {
+                if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+                    if(xhr.responseText == "1") {
+                        document.getElementById("alert").style.visibility = "visible";
+                        $("#alert").html("用户名已被注册");
+                    } else {
+                        document.getElementById("alert").style.visibility = "hidden";
+                    }
+                }
+            }
+        };
+    }
+    
+    </script>
 </body>
 </html>

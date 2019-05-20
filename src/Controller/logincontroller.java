@@ -10,11 +10,9 @@ import java.util.Set;
 
 public class logincontroller {
 
-        public boolean checkLogin(ArrayList list) throws Exception {
-            String user = (String)list.get(0);
-            String password = (String)list.get(1);
-            boolean rt = false;
-
+        public String checkLogin(String username) throws Exception {
+            String user = username;
+            String password = "";
             try
             {
                 Dao dao = new Dao();
@@ -33,12 +31,7 @@ public class logincontroller {
                 {
                     if(it.next().equals(user))
                     {
-
-                        if(password.equals(hm.get(user)))
-                        {
-                            rt = true;
-                            break;
-                        }
+                        password = hm.get(user);
                     }
                 }
             }
@@ -46,6 +39,6 @@ public class logincontroller {
             {
                 System.out.println("数据库出问题");
             }
-            return rt;
+            return password;
         }
 }

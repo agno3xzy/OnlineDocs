@@ -14,8 +14,7 @@ public class registcontroller {
         String password = (String)list.get(1);
         boolean rt = false;
 
-        try
-        {
+        try {
             Dao dao = new Dao();
             Connection conn = dao.getConnection();
             PreparedStatement p = conn.prepareStatement("select * from user where user_name=" + "\'" + user +  "\'");
@@ -26,9 +25,20 @@ public class registcontroller {
             String sql = "insert into user(user_name,password) values(" + "\'" + user +  "\'" + "," + "\'" + password + "\'" +");";
             sm.execute(sql);
             dao.close(rs, p, conn);
+        } catch(SQLException e) {
+            e.printStackTrace();
         }
-        catch(SQLException e)
-        {
+        return true;
+    }
+    public boolean checkRegist(String username) throws Exception {
+        try {
+            Dao dao = new Dao();
+            Connection conn = dao.getConnection();
+            PreparedStatement p = conn.prepareStatement("select * from user where user_name=" + "\'" + username +  "\'");
+            ResultSet rs = p.executeQuery();
+            if(rs.next())
+                return false;
+        } catch(SQLException e){
             e.printStackTrace();
         }
         return true;

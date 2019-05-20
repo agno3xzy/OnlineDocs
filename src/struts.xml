@@ -8,11 +8,10 @@
     <package name="default" namespace="/" extends="struts-default">
         <action name="Signin" class="Registration.SigninAction">
             <result name="success">/signin_result.jsp</result>
-            <result name="error">/index.jsp</result>
         </action>
         <action name="Signup" class="Registration.SignupAction">
             <result name="success">/signin_result.jsp</result>
-            <result name="error">/index.jsp</result>
+            <result name="error">/signup.jsp</result>
         </action>
         <action name="mySigninAction" class="ButtonSupport.ButtonAction" method="signin">
             <result>/signin.jsp</result>
@@ -20,5 +19,7 @@
         <action name="mySignupAction" class="ButtonSupport.ButtonAction" method="signup">
             <result>/signup.jsp</result>
         </action>
+        <action name="usernameCheck" class="Registration.CheckSignupAction"></action>
+        <action name="passwordCheck" class="Registration.CheckSigninAction"></action>
     </package>
 </struts>

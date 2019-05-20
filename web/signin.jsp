@@ -27,26 +27,66 @@
 <div class="mx-auto" style="width: 500px;">
 
     <form action="Signin.action" method="post">
-
+        <div class="alert alert-danger" role="alert" id="alert" style="visibility:hidden;">
+        </div>
         <div class="form-group row">
-            <label for="inputUsername3" class="col-sm-2 col-form-label">Username</label>
+            <label for="username" class="col-sm-2 col-form-label">Username</label>
             <div class="col-sm-10">
-                <input type="text" name="username" class="form-control" id="inputUsername3" placeholder="Username">
+                <input type="text" name="username" class="form-control" id="username" placeholder="Username">
             </div>
         </div>
         <div class="form-group row">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+            <label for="password" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
-                <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password">
+                <input type="password" name="password" class="form-control" id="password" placeholder="Password" onblur="checklogin()">
             </div>
         </div>
         <div class="form-group row">
             <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary">Sign in</button>
+                <button type="submit" class="btn btn-primary" onclick="return validate()">Sign in</button>
             </div>
         </div>
     </form>
 </div>
+
+<script type="text/javascript">
+    function checklogin(){
+        var xhr = new XMLHttpRequest();
+        var urlString = "/OnlineDocs/passwordCheck.action?username="
+            + document.getElementById("username").value;
+        xhr.open("post",urlString,true);
+        xhr.send(null);
+        //检查响应状态
+        xhr.onreadystatechange = function() {
+            if(xhr.readyState == 4) {
+                if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+                    console.log(xhr.responseText);
+                    console.log(document.getElementById("password").value);
+                    if(xhr.responseText == "") {
+                        flag = false;
+                    } else {
+                        if(xhr.responseText== document.getElementById("password").value)
+                        {
+                            document.getElementById("alert").style.visibility = "hidden";
+                        } else
+                        {
+                            document.getElementById("alert").style.visibility = "visible";
+                            $("#alert").html("用户名或密s码错误");
+                        }
+                    }
+                }
+            }
+        };
+    }
+    function validate() {
+        if(document.getElementById("alert").style.visibility == "visible") {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+</script>
 </body>
 </html>
 
