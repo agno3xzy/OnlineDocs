@@ -32,13 +32,13 @@
         <div class="form-group row">
             <label for="username" class="col-sm-2 col-form-label">Username</label>
             <div class="col-sm-10">
-                <input type="text" name="username" class="form-control" id="username" placeholder="Username">
+                <input type="text" name="username" class="form-control" id="username" placeholder="Username" required="true">
             </div>
         </div>
         <div class="form-group row">
             <label for="password" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
-                <input type="password" name="password" class="form-control" id="password" placeholder="Password" onblur="checklogin()">
+                <input type="password" name="password" class="form-control" id="password" placeholder="Password" onblur="checklogin()" required="true">
             </div>
         </div>
         <div class="form-group row">
@@ -67,7 +67,8 @@
                     //console.log(xhr.responseText);
                     //console.log(document.getElementById("password").value);
                     if(xhr.responseText == "") {
-                        flag = false;
+                        document.getElementById("alert").style.visibility = "visible";
+                        $("#alert").html("用户名或密码错误");
                     } else {
                         if(xhr.responseText== document.getElementById("password").value)
                         {
