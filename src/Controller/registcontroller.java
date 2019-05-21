@@ -24,7 +24,9 @@ public class registcontroller {
             Statement sm = conn.createStatement();
             String sql = "insert into user(user_name,password) values(" + "\'" + user +  "\'" + "," + "\'" + password + "\'" +");";
             sm.execute(sql);
-            dao.close(rs, p, conn);
+            dao.close(rs, p);
+            dao.close(sm);
+            dao.close(conn);
         } catch(SQLException e) {
             e.printStackTrace();
         }

@@ -24,7 +24,8 @@ public class logincontroller {
                 {
                     hm.put(rs.getString("user_name"), rs.getString("password"));
                 }
-                dao.close(rs, p, conn);
+                dao.close(rs, p);
+                dao.close(conn);
                 Set<String> set = hm.keySet();
                 Iterator it = set.iterator();
                 while(it.hasNext())

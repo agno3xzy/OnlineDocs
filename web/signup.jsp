@@ -48,11 +48,11 @@
 </div>
 
     <script type="text/javascript">
-    function validate(){
-    var word1= document.getElementById("password").value;
-    var word2 = document.getElementById("confirmpassword").value;
-    if(word1 != word2){
-      document.getElementById("alert").style.visibility = "visible";
+  function validate(){
+  var word1= document.getElementById("password").value;
+  var word2 = document.getElementById("confirmpassword").value;
+  if(word1 != word2){
+    document.getElementById("alert").style.visibility = "visible";
       $("#alert").html("两次输入密码不一致!");
       document.getElementById("confirmpassword").focus();
       return false;
@@ -66,14 +66,17 @@
     }
     function checkUsernameExist() {
         var xhr = new XMLHttpRequest();
-        var urlString = "/OnlineDocs/usernameCheck.action?username="
+        var urlString = "usernameCheck.action?username="
         + document.getElementById("username").value;
+        //window.alert(document.getElementById("username").value);
         xhr.open("post",urlString,true);
         xhr.send(null);
 
         //检查响应状态
         xhr.onreadystatechange = function() {
+            //window.alert(xhr.readyState);
             if(xhr.readyState == 4) {
+                //window.alert(xhr.status);
                 if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
                     if(xhr.responseText == "1") {
                         document.getElementById("alert").style.visibility = "visible";

@@ -24,12 +24,35 @@ public class Dao {
         return conn;
     }
 
-    public void close(ResultSet rs, PreparedStatement p, Connection conn)
+    public void close(ResultSet rs, PreparedStatement p)
     {
         try
         {
             rs.close();
             p.close();
+        }
+        catch(SQLException e)
+        {
+            System.out.println("数据库关闭出错");
+        }
+    }
+
+    public void close(Statement s)
+    {
+        try
+        {
+            s.close();
+        }
+        catch(SQLException e)
+        {
+            System.out.println("数据库关闭出错");
+        }
+    }
+
+    public void close(Connection conn)
+    {
+        try
+        {
             conn.close();
         }
         catch(SQLException e)

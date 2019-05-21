@@ -52,16 +52,20 @@
 <script type="text/javascript">
     function checklogin(){
         var xhr = new XMLHttpRequest();
-        var urlString = "/OnlineDocs/passwordCheck.action?username="
+        var urlString = "passwordCheck.action?username="
             + document.getElementById("username").value;
+        //window.alert(document.getElementById("username").value);
         xhr.open("post",urlString,true);
         xhr.send(null);
+
+
+
         //检查响应状态
         xhr.onreadystatechange = function() {
             if(xhr.readyState == 4) {
                 if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-                    console.log(xhr.responseText);
-                    console.log(document.getElementById("password").value);
+                    //console.log(xhr.responseText);
+                    //console.log(document.getElementById("password").value);
                     if(xhr.responseText == "") {
                         flag = false;
                     } else {
@@ -71,7 +75,7 @@
                         } else
                         {
                             document.getElementById("alert").style.visibility = "visible";
-                            $("#alert").html("用户名或密s码错误");
+                            $("#alert").html("用户名或密码错误");
                         }
                     }
                 }
