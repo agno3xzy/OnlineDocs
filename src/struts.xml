@@ -30,7 +30,7 @@
             </result>
         </action>
         <action name="editAction" class="File.EditAction">
-            <result>/edit.jsp</result>
+            <result>/edit_main.jsp</result>
         </action>
         <action name="deleteAction" class="File.DeleteAction">
             <result>/document_manage.jsp</result>
