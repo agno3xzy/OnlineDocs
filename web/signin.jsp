@@ -20,6 +20,7 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/guide.css"/>
     <title>用户登录</title>
 </head>
 <body>
@@ -47,6 +48,11 @@
             </div>
         </div>
     </form>
+    <div class="guide">
+        <div class="guide-wrap">
+            <a href="javascript:history.back(-1)" class="report" title="返回"><span>返回</span></a>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">
