@@ -102,6 +102,7 @@
                 "</div>"+
                 "<form action= 'editAction'  enctype='multipart/form-data' method='post'>"+
                     "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
+                    "<input type='text' style ='display:none' name='content' value=''>"+
                     "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
                     "<button type='submit' class='btn btn-primary '>编辑</button>"+
                 "</form>"+
@@ -136,6 +137,7 @@
                 "</div>"+
                 "<form action= 'editAction'  enctype='multipart/form-data' method='post'>"+
                     "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
+                    "<input type='text' style ='display:none' name='content' value=''>"+
                     "<input type='text' style ='display:none' name='path' value='"+path+"\\coop\\"+fnameList_coop[i]+"'>"+
                     "<button type='submit' class='btn btn-primary '>编辑</button>"+
                 "</form>"+
