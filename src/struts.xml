@@ -30,7 +30,7 @@
             </result>
         </action>
         <action name="editAction" class="File.EditAction">
-            <result>/edit_main.jsp</result>
+            <result>/edit.jsp</result>
         </action>
         <action name="deleteAction" class="File.DeleteAction">
             <result>/document_manage.jsp</result>
@@ -44,12 +44,5 @@
             <result>/document_manage.jsp</result>
             <result name="input" >/upload_fail.jsp</result>
         </action>
-
-        <action name="FileSaveAction" class="File.SaveFileAction">
-            <result>/edit_main.jsp</result>
-        </action>
-
-
-
     </package>
 </struts>
