@@ -10,33 +10,35 @@ public class EditAction {
 
     String path;
     String content;
+    String filename;
 
-    public String getPath()
-    {
+    public String getPath() {
         return this.path;
     }
 
-    public void setPath(String path)
-    {
+    public void setPath(String path) {
         this.path = path;
     }
 
-    public String getContent()
-    {
+    public String getContent() {
         return this.content;
     }
 
-    public void setContent(String content)
-    {
+    public void setContent(String content) {
         this.content = content;
     }
 
-    public String execute()
-    {
+    public void setFilename(String path){
 
+        String[] pathArray = getPath().split("/");
+        this.filename = pathArray[pathArray.length-1];
+        System.out.print(this.filename);
+    }
 
-
-
+    public String getFilename(){
+        return this.filename;
+    }
+    public String execute() {
         return SUCCESS;
     }
 

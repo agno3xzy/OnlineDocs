@@ -91,10 +91,8 @@
         num_create=0
     else
         num_create=fnameList_create.length;
-    //window.alert(fnameList_create.length);
     for (var i=0;i<num_create;i++)
     {
-        //window.alert(fnameList_create[i]);
         document.getElementById("creat_list").innerHTML+=
             "<div class='row bg-info'>"+
                 "<div class='col text-left'>"+
@@ -120,7 +118,6 @@
 
     var fnameList_coop=document.getElementById("list_coop").innerHTML;
     fnameList_coop=fnameList_coop.split(",")
-    //window.alert(fnameList_coop.length);
     var num_coop;
     if (fnameList_coop[0]=="")
         num_coop=0
@@ -128,7 +125,6 @@
         num_coop=fnameList_coop.length;
     for (var i=0;i<num_coop;i++)
     {
-        //window.alert(fnameList_coop[i]);
         document.getElementById("coop_list").innerHTML+=
             "<div class='row bg-info'>"+
                 "<div class='col text-left'>"+
@@ -151,7 +147,6 @@
                 "</form>"+
             "</div>"
     }
-
 </script>
 </body>
 </html>

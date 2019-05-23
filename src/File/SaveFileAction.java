@@ -13,29 +13,32 @@ public class SaveFileAction {
 
     String path;
     String content;
+    String filename;
 
-    public String getPath()
-    {
+    public String getPath() {
         return this.path;
     }
 
-    public void setPath(String path)
-    {
+    public void setPath(String path) {
         this.path = path;
+        String[] pathArray = path.split("/");
+        this.filename = pathArray[pathArray.length - 1];
+        System.out.print(this.filename);
     }
 
-    public String getContent()
-    {
+    public String getContent() {
         return this.content;
     }
 
-    public void setContent(String content)
-    {
+    public void setContent(String content) {
         this.content = content;
     }
 
-    public String execute() throws IOException
-    {
+    public String getFilename() {
+        return this.filename;
+    }
+
+    public String execute() throws IOException {
 
         File file = new File(path);
 

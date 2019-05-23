@@ -44,7 +44,6 @@
             <result>/document_manage.jsp</result>
             <result name="input" >/upload_fail.jsp</result>
         </action>
-
         <action name="FileSaveAction" class="File.SaveFileAction">
             <result>/edit_main.jsp</result>
         </action>

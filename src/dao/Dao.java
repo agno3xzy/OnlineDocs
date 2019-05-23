@@ -6,7 +6,7 @@ public class Dao {
     public Connection getConnection(){
         String url = "jdbc:mysql://localhost:3306/OnlineDocs?serverTimezone=GMT%2B8";
         String username = "root";
-        String password = "1111";
+        String password = "1234";
 
         Connection conn = null;
         try
