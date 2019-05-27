@@ -23,7 +23,7 @@ public class UploadAction {
     public String execute() throws IOException {
         String path = ServletActionContext.getServletContext().getRealPath("/fileUpload/");//该path为tomcat下的webapp/工程/下
         for(int i = 0;i<fileUpload.length;i++){
-            File log=new File(path+"\\"+username+"\\log\\"+fileUploadFileName[i]);
+            File log=new File(path+"\\"+username+"\\log");
             FileUtils.copyFile(fileUpload[i],new File(path+"\\"+ username + "\\create\\" + fileUploadFileName[i]));
             log.mkdirs();
             try

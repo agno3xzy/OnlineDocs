@@ -2398,6 +2398,10 @@ public class diff_match_patch {
             this.diffs = new LinkedList<Diff>();
         }
 
+        public LinkedList<Diff> getDiffs() {
+            return diffs;
+        }
+
         /**
          * Emulate GNU diff's format.
          * Header: @@ -382,8 +481,9 @@
