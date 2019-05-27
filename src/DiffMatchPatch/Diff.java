@@ -27,7 +27,7 @@ public class Diff {
      * @Param: String newVerPath latest version's document path
      * @author <a href="mail to: agno3xzy@gmail.com">agno3, gui Li</a>
      * @CreateDate: 2019年5月27日 15点16分
-     * @update: [序号][日期YYYY-MM-DD] [更改人姓名][变更描述]
+     * @update:
      * @LogStructure
      * * Timestamp
      *      * Patches
@@ -101,7 +101,7 @@ public class Diff {
      * @Param: String oldVerPath last version's document path
      * @author <a href="mail to: agno3xzy@gmail.com">agno3, gui Li</a>
      * @CreateDate: 2019年5月27日 15点16分
-     * @update: [序号][日期YYYY-MM-DD] [更改人姓名][变更描述]
+     * @update:
      * @LogStructure
      * * Timestamp
      *      * UserID
