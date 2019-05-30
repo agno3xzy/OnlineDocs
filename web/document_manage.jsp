@@ -101,6 +101,8 @@
                 "<form action= 'editAction'  enctype='multipart/form-data' method='post'>"+
                     "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
                     "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
+                    "<input type='text' style ='display:none' name='docOwner' value=''>"+
+                    "<input type='text' style ='display:none' name='docSharer' value=''>"+
                     "<button type='submit' class='btn btn-primary '>编辑</button>"+
                 "</form>"+
                 "<form action= 'downloadAction'  enctype='multipart/form-data' method='post'>"+
@@ -133,6 +135,8 @@
                 "<form action= 'editAction'  enctype='multipart/form-data' method='post'>"+
                     "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
                     "<input type='text' style ='display:none' name='path' value='"+path+"\\coop\\"+fnameList_coop[i]+"'>"+
+                    "<input type='text' style ='display:none' name='docOwner' value=''>"+
+                    "<input type='text' style ='display:none' name='docSharer' value=''>"+
                     "<button type='submit' class='btn btn-primary '>编辑</button>"+
                 "</form>"+
                 "<form action= 'downloadAction'  enctype='multipart/form-data' method='post'>"+

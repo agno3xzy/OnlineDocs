@@ -9,6 +9,11 @@
         <action name="Signin" class="Registration.SigninAction">
             <result name="success">/document_manage.jsp</result>
         </action>
+
+        <action name="ConfirmShareSigninAction" class="Registration.ConfirmShareSigninAction">
+            <result name="success">/confirm_share.jsp</result>
+        </action>
+
         <action name="Signup" class="Registration.SignupAction">
             <result name="success">/document_manage.jsp</result>
             <result name="error">/signup.jsp</result>
@@ -44,8 +49,17 @@
             <result>/document_manage.jsp</result>
             <result name="input" >/upload_fail.jsp</result>
         </action>
+
         <action name="FileSaveAction" class="File.SaveFileAction">
             <result>/edit_main.jsp</result>
+        </action>
+
+        <action name="ClickShareLinkAction" class="Share.ClickShareLinkAction">
+            <result name="login">/</result>
+        </action>
+
+        <action name="ShareAction" class="Share.ShareAction">
+            <result>/share.jsp</result>
         </action>
 
     </package>
