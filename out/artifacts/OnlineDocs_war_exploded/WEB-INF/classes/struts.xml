@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <package name="default" namespace="/" extends="struts-default">
+        <action name="Signin" class="Registration.SigninAction">
+            <result name="success">/document_manage.jsp</result>
+        </action>
+
+        <action name="ConfirmShareSigninAction" class="Registration.ConfirmShareSigninAction">
+            <result name="success">/confirm_share.jsp</result>
+        </action>
+
+        <action name="Signup" class="Registration.SignupAction">
+            <result name="success">/document_manage.jsp</result>
+            <result name="error">/signup.jsp</result>
+        </action>
+        <action name="mySigninAction" class="ButtonSupport.ButtonAction" method="signin">
+            <result>/signin.jsp</result>
+        </action>
+        <action name="mySignupAction" class="ButtonSupport.ButtonAction" method="signup">
+            <result>/signup.jsp</result>
+        </action>
+        <action name="usernameCheck" class="Registration.CheckSignupAction"></action>
+        <action name="passwordCheck" class="Registration.CheckSigninAction"></action>
+        <action name="downloadAction" class="File.DownloadAction">
+            <result name="success" type="stream">
+                <param name="contentType">application/x-download</param>
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${fileName}"</param>
+                <param name="bufferSize">4096</param>
+            </result>
+        </action>
+        <action name="editAction" class="File.EditAction">
+            <result>/edit_main.jsp</result>
+        </action>
+        <action name="deleteAction" class="File.DeleteAction">
+            <result>/document_manage.jsp</result>
+        </action>
+        <action name="uploadAction" class="File.UploadAction">
+            <interceptor-ref name="defaultStack">
+                <param name="fileUpload.maximumSize">500000000</param>
+                <param name="fileUpload.allowedTypes">text/plain,application/msword</param>
+                <param name="fileUpload.allowedExtensions">.txt,.docx</param>
+            </interceptor-ref>
+            <result>/document_manage.jsp</result>
+            <result name="input" >/upload_fail.jsp</result>
+        </action>
+
+        <action name="FileSaveAction" class="File.SaveFileAction">
+            <result>/edit_main.jsp</result>
+        </action>
+
+        <action name="ClickShareLinkAction" class="Share.ClickShareLinkAction">
+            <result name="login">/</result>
+        </action>
+
+        <action name="ShareAction" class="Share.ShareAction">
+            <result>/share.jsp</result>
+        </action>
+
+    </package>
+</struts>
