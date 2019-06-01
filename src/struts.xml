@@ -42,11 +42,13 @@
                 <param name="fileUpload.allowedExtensions">.txt,.docx</param>
             </interceptor-ref>
             <result>/document_manage.jsp</result>
-            <result name="input" >/upload_fail.jsp</result>
+            <result name="input">/upload_fail.jsp</result>
         </action>
         <action name="FileSaveAction" class="File.SaveFileAction">
             <result>/edit_main.jsp</result>
         </action>
-
+        <action name="historyAction" class="File.HistoryAction" >
+            <result>/history.jsp</result>
+        </action>
     </package>
 </struts>

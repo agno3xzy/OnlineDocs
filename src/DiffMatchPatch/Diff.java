@@ -28,9 +28,8 @@ public class Diff {
      * @author <a href="mail to: agno3xzy@gmail.com">agno3, gui Li</a>
      * @CreateDate: 2019年5月27日 15点16分
      * @update:
-     * @LogStructure
-     * * Timestamp
-     *      * Patches
+     * @LogStructure * Timestamp
+     * * Patches
      **/
 
     public static void saveVersionLog(String oldVerPath, String newVerPath) throws IOException {
@@ -78,13 +77,14 @@ public class Diff {
 
         File versionLogFile = new File(versionLogPath);
 
-        if(versionLogFile.exists()){
+        if (versionLogFile.exists()) {
             String content = new Scanner(versionLogFile).useDelimiter("\\Z").next();
-            Type type = new TypeToken<Map<String, String>>(){}.getType();
+            Type type = new TypeToken<Map<String, String>>() {
+            }.getType();
             versionLog = gson.fromJson(content, type);
         }
 
-        versionLog.put(timeStamp,patch);
+        versionLog.put(timeStamp, patch);
         PrintStream ps = new PrintStream(new FileOutputStream(versionLogFile));
         ps.print(gson.toJson(versionLog));
 
@@ -102,12 +102,11 @@ public class Diff {
      * @author <a href="mail to: agno3xzy@gmail.com">agno3, gui Li</a>
      * @CreateDate: 2019年5月27日 15点16分
      * @update:
-     * @LogStructure
-     * * Timestamp
-     *      * UserID
-     *          * Patches
+     * @LogStructure * Timestamp
+     * * UserID
+     * * Patches
      **/
-    public static void saveEditLog(String userID,String oldVerPath, LinkedList<diff_match_patch.Patch> editPatches) throws FileNotFoundException {
+    public static void saveEditLog(String userID, String oldVerPath, LinkedList<diff_match_patch.Patch> editPatches) throws FileNotFoundException {
         diff_match_patch dmp = new diff_match_patch();
         String editPatch = dmp.patch_toText(editPatches);
         String timeStamp = timeStamp();
@@ -115,28 +114,30 @@ public class Diff {
         String editLogPath = getLogPath(oldVerPath, false);
 
         Map<String, String> editLog1 = new HashMap<String, String>();
-        Map<String,Map<String, String>> editLog2 = new HashMap<String,Map<String, String>>();
+        Map<String, Map<String, String>> editLog2 = new HashMap<String, Map<String, String>>();
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
 
         File editLogFile = new File(editLogPath);
-        Type type = new TypeToken<Map<String,Map<String, String>>>(){}.getType();
+        Type type = new TypeToken<Map<String, Map<String, String>>>() {
+        }.getType();
 
-        if(editLogFile.exists()){
+        if (editLogFile.exists()) {
             String content = new Scanner(editLogFile).useDelimiter("\\Z").next();
 
             editLog2 = gson.fromJson(content, type);
         }
-        editLog1.put(userID ,editPatch);
+        editLog1.put(userID, editPatch);
 
-        editLog2.put(timeStamp,editLog1);
+        editLog2.put(timeStamp, editLog1);
 
         PrintStream ps = new PrintStream(new FileOutputStream(editLogFile));
-        ps.print(gson.toJson(editLog2,type));
+        ps.print(gson.toJson(editLog2, type));
         ps.close();
 
     }
 
     public static void main(String args[]) throws IOException {
+        //saveVersionLog("C:\\Users\\agno3\\Desktop\\log\\test.txt","C:\\Users\\agno3\\Desktop\\log\\test2.txt");
     }
 
     /**
@@ -175,21 +176,20 @@ public class Diff {
     /**
      * * 获取日志地址
      */
-    public static String getLogPath(String filePath, boolean type){
+    public static String getLogPath(String filePath, boolean type) {
         String[] path = filePath.split("\\\\");
         path[path.length - 2] = "log";
-        String [] test = path[path.length - 1].split("\\.");
+        String[] test = path[path.length - 1].split("\\.");
         String filename = path[path.length - 1].split("\\.")[0];
 
-        if(type == true){
+        if (type == true) {
             String versionLogName = filename + "_version.json";
-            path[path.length - 1 ] = versionLogName;
-            return StringUtils.join(path,"\\");
-        }
-        else{
+            path[path.length - 1] = versionLogName;
+            return StringUtils.join(path, "\\");
+        } else {
             String editLogName = filename + "_edit.json";
-            path[path.length - 1 ] = editLogName;
-            return StringUtils.join(path,"\\");
+            path[path.length - 1] = editLogName;
+            return StringUtils.join(path, "\\");
         }
     }
 }
