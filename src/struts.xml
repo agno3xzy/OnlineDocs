@@ -21,6 +21,7 @@
         </action>
         <action name="usernameCheck" class="Registration.CheckSignupAction"></action>
         <action name="passwordCheck" class="Registration.CheckSigninAction"></action>
+        <action name="handleConflict" class="ConflictHandle.ConflictHandle"></action>
         <action name="downloadAction" class="File.DownloadAction">
             <result name="success" type="stream">
                 <param name="contentType">application/x-download</param>
@@ -47,6 +48,5 @@
         <action name="FileSaveAction" class="File.SaveFileAction">
             <result>/edit_main.jsp</result>
         </action>
-
     </package>
 </struts>

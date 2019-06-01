@@ -8,9 +8,18 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 
 public class EditAction {
 
-    String path;
-    String content;
-    String filename;
+    private String path;
+    private String content;
+    private String filename;
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getPath() {
         return this.path;
