@@ -5,6 +5,10 @@
   Time: 15:12
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="dao.Dao" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.ResultSet" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="File.*" %>
@@ -28,8 +32,26 @@
 <body onload="loadContent()">
 
 <%
+
+    Dao dao = new Dao();
+    Connection conn = dao.getConnection();
+    String docName = " ";
+
     String path = request.getParameter("path");   // 这边文件目录需改成相对路径
     String content = request.getParameter("content");
+    String docOwner = request.getParameter("docOwner");
+    String docSharer = request.getParameter("docSharer");
+
+    try {
+        PreparedStatement p1 = conn.prepareStatement("select * from document where text_path='" + path + "'");
+        ResultSet rs1 = p1.executeQuery();
+        rs1.next();
+        docName = rs1.getString("document_name");
+    }
+    catch (Exception e)
+    {
+        e.printStackTrace();
+    }
     File file = new File(path);
     FileReader fr = new FileReader(file);  //字符输入流
     BufferedReader br = new BufferedReader(fr);  //使文件可按行读取并具有缓冲功能
@@ -63,10 +85,21 @@
                     分享
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">获得此链接的人可查看该文档</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">获得此链接的人可编辑该文档</a>
-                </div>
+
+                    <form action="ShareAction" enctype='multipart/form-data' method='post'>
+                        <input hidden="hidden" name="docName" value=<%=docName%>>
+                        <input hidden="hidden" name="path" value=<%=path%>>
+                        <input hidden="hidden" name="authority" value="查看">
+                        <button type="submit">分享查看权限</button>
+                    </form>
+
+                        <form action="ShareAction" enctype='multipart/form-data' method='post'>
+                            <input hidden="hidden" name="docName" value=<%=docName%>>
+                            <input hidden="hidden" name="path" value=<%=path%>>
+                            <input hidden="hidden" name="authority" value="编辑">
+                            <button type="submit">分享编辑权限</button>
+                        </form>
+                    </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
@@ -82,8 +115,9 @@
 <div class="row" style="margin-top: 50px">
     <div class="col-4" style="margin-top: 50px">
         <nav class="navbar flex-column navbar-light bg-light">
-            <span class="navbar-brand mb-0 h1">文档信息：<s:property value="filename"/></span>
-            <span class="navbar-brand mb-0 h1">创建者：</span>
+            <span class="navbar-brand mb-0 h1">文档信息：</span>
+            <span class="navbar-brand mb-0 h1">创建者：<label value=<%=docOwner%>/></span>
+            <span class="navbar-brand mb-0 h1">共享合作者：<label value=<%=docSharer%>/></span>
         </nav>
     </div>
     <div class="col-8">

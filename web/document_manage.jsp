@@ -11,7 +11,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
-    String path=ServletActionContext.getServletContext().getRealPath("/fileUpload/")+ "\\" + request.getAttribute("username");
+    String path=ServletActionContext.getServletContext().getRealPath("/fileUpload/") + request.getAttribute("username");
     File file_create = new File(path  + "\\create\\");
     File[] fileList_create = file_create.listFiles();
     String fnameList_create="";
@@ -95,24 +95,29 @@
     {
         document.getElementById("creat_list").innerHTML+=
             "<div class='row bg-info'>"+
-                "<div class='col text-left'>"+
-                    fnameList_create[i]+
-                "</div>"+
-                "<form action= 'editAction'  enctype='multipart/form-data' method='post'>"+
-                    "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-                    "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
-                    "<button type='submit' class='btn btn-primary '>编辑</button>"+
-                "</form>"+
-                "<form action= 'downloadAction'  enctype='multipart/form-data' method='post'>"+
-                    "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-                    "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
-                    "<button type='submit' class='btn btn-success '>下载</button>"+
-                "</form>"+
-                "<form action= 'deleteAction'  enctype='multipart/form-data' method='post'>"+
-                    "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-                    "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
-                    "<button type='submit' class='btn btn-danger '>删除</button>"+
-                "</form>"+
+            "<div class='col text-left'>"+
+            fnameList_create[i]+
+            "</div>"+
+            "<form action= 'editAction'  enctype='multipart/form-data' method='post'>"+
+            "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
+            "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
+            "<button type='submit' class='btn btn-primary '>编辑</button>"+
+            "</form>"+
+            "<form action= 'downloadAction'  enctype='multipart/form-data' method='post'>"+
+            "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
+            "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
+            "<button type='submit' class='btn btn-success '>下载</button>"+
+            "</form>"+
+            "<form action= 'deleteAction'  enctype='multipart/form-data' method='post'>"+
+            "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
+            "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
+            "<button type='submit' class='btn btn-danger '>删除</button>"+
+            "</form>"+
+            "<form action= 'historyAction'  enctype='multipart/form-data' method='post'>"+
+            "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
+            "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
+            "<button type='submit' class='btn btn-success '>历史</button>"+
+            "</form>"+
             "</div>"
     }
 
@@ -127,24 +132,24 @@
     {
         document.getElementById("coop_list").innerHTML+=
             "<div class='row bg-info'>"+
-                "<div class='col text-left'>"+
-                    fnameList_coop[i]+
-                "</div>"+
-                "<form action= 'editAction'  enctype='multipart/form-data' method='post'>"+
-                    "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-                    "<input type='text' style ='display:none' name='path' value='"+path+"\\coop\\"+fnameList_coop[i]+"'>"+
-                    "<button type='submit' class='btn btn-primary '>编辑</button>"+
-                "</form>"+
-                "<form action= 'downloadAction'  enctype='multipart/form-data' method='post'>"+
-                    "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-                    "<input type='text' style ='display:none' name='path' value='"+path+"\\coop\\"+fnameList_coop[i]+"'>"+
-                    "<button type='submit' class='btn btn-success '>下载</button>"+
-                "</form>"+
-                "<form action= 'deleteAction'  enctype='multipart/form-data' method='post'>"+
-                    "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-                    "<input type='text' style ='display:none' name='path' value='"+path+"\\coop\\"+fnameList_coop[i]+"'>"+
-                    "<button type='submit' class='btn btn-danger '>删除</button>"+
-                "</form>"+
+            "<div class='col text-left'>"+
+            fnameList_coop[i]+
+            "</div>"+
+            "<form action= 'editAction'  enctype='multipart/form-data' method='post'>"+
+            "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
+            "<input type='text' style ='display:none' name='path' value='"+path+"\\coop\\"+fnameList_coop[i]+"'>"+
+            "<button type='submit' class='btn btn-primary '>编辑</button>"+
+            "</form>"+
+            "<form action= 'downloadAction'  enctype='multipart/form-data' method='post'>"+
+            "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
+            "<input type='text' style ='display:none' name='path' value='"+path+"\\coop\\"+fnameList_coop[i]+"'>"+
+            "<button type='submit' class='btn btn-success '>下载</button>"+
+            "</form>"+
+            "<form action= 'deleteAction'  enctype='multipart/form-data' method='post'>"+
+            "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
+            "<input type='text' style ='display:none' name='path' value='"+path+"\\coop\\"+fnameList_coop[i]+"'>"+
+            "<button type='submit' class='btn btn-danger '>删除</button>"+
+            "</form>"+
             "</div>"
     }
 </script>
