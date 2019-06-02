@@ -23,8 +23,8 @@ public class UploadAction {
     public String execute() throws IOException {
         String path = ServletActionContext.getServletContext().getRealPath("/fileUpload/");//该path为tomcat下的webapp/工程/下
         for(int i = 0;i<fileUpload.length;i++){
-            File log=new File(path+"\\"+username+"\\log");
-            FileUtils.copyFile(fileUpload[i],new File(path+"\\"+ username + "\\create\\" + fileUploadFileName[i]));
+            File log=new File(path+"/"+username+"/log");
+            FileUtils.copyFile(fileUpload[i],new File(path+"/"+ username + "/create/" + fileUploadFileName[i]));
             log.mkdirs();
             try
             {
@@ -36,8 +36,8 @@ public class UploadAction {
                         "VALUES ('"+fileUploadFileName[i]+"','"+
                         DateFormat.getDateTimeInstance(2, 2, Locale.CHINESE).format(new java.util.Date()) +
                         "','"+ DateFormat.getDateTimeInstance(2, 2, Locale.CHINESE).format(new java.util.Date()) +
-                        "','"+path+"\\"+ username + "\\create\\" + fileUploadFileName[i]+
-                        "','"+path+"\\"+ username + "\\log\\" + fileUploadFileName[i]+"')";
+                        "','"+path+"/"+ username + "/create/" + fileUploadFileName[i]+
+                        "','"+path+"/"+ username + "/log/" + fileUploadFileName[i]+"')";
                 sm1.execute(sql1);
 
                 PreparedStatement p1 = conn.prepareStatement("select * from user where user_name='"+username+"'");
@@ -45,7 +45,7 @@ public class UploadAction {
                 rs1.next();
 
                 PreparedStatement p2 = conn.prepareStatement("select * from document " +
-                        "where text_path='"+path+"\\"+ username + "\\create\\" + fileUploadFileName[i]+"'");
+                        "where text_path='"+path+"/"+ username + "/create/" + fileUploadFileName[i]+"'");
                 ResultSet rs2 = p2.executeQuery();
                 rs2.next();
 

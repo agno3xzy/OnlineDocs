@@ -13,7 +13,7 @@ public class DownloadAction {
     public String execute(){
         try {
             this.inputStream = new FileInputStream(path);//这里有很多处理手段满足不同需求(从数据库读取等)
-            String[] array=path.split("\\\\");
+            String[] array=path.split("/");
             this.fileName = array[array.length-1];
         } catch (FileNotFoundException e) {
             e.printStackTrace();
