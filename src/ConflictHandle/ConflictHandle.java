@@ -138,7 +138,7 @@ public class ConflictHandle extends ActionSupport {
             String[] string_t=path_t.split("\\\\");
             String[] string_tt=string_t[string_t.length-1].split("\\.");
             string_tt[0]+="_t";
-            string_t[string_t.length-1]=String.join("\\.",string_tt);
+            string_t[string_t.length-1]=String.join(".",string_tt);
             fop_t=new FileOperation(path_t,String.join("\\\\",string_t),
                     0,new HashMap<String, Integer>(),new ArrayList<>());
         }

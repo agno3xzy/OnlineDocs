@@ -24,8 +24,8 @@ public class FileOperation {
         this.optable=optable;
         this.oldFile=new File(oldFilePath);
         this.newFile=new File(newFilePath);
-        this.newFile.mkdirs();
         try{
+            this.newFile.createNewFile();
             copyFile(this.oldFile,this.newFile);
         }
         catch (Exception e){

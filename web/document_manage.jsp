@@ -17,21 +17,12 @@
     String fnameList_create="";
 
     if (fileList_create!=null && fileList_create.length!=0){
-        fnameList_create=fileList_create[0].getName();
-        for (int i = 1; i < fileList_create.length; i++) {
-            fnameList_create+=","+fileList_create[i].getName();
+        for (int i = 0; i < fileList_create.length; i++) {
+            if (fileList_create[i].getName().indexOf("_t")==-1){
+                fnameList_create+=fileList_create[i].getName()+",";
+            }
         }
-    }
-
-    File file_coop = new File(path + "\\coop\\");
-    File[] fileList_coop = file_coop.listFiles();
-    String fnameList_coop="";
-
-    if (fileList_coop!=null && fileList_coop.length!=0){
-        fnameList_coop=fileList_coop[0].getName();
-        for (int i = 1; i < fileList_coop.length; i++) {
-            fnameList_coop+=","+fileList_coop[i].getName();
-        }
+        fnameList_create=fnameList_create.substring(0,fnameList_create.length()-1);
     }
 %>
 <html>
@@ -59,9 +50,10 @@
     <p class="mb-0">Start OnlineDocs Now!</p>
 
     <label id="list_create" hidden="hidden" ><%=fnameList_create %></label>
-    <label id="list_coop" hidden="hidden" ><%=fnameList_coop %></label>
     <label id="path" hidden="hidden" ><%=path %></label>
     <label id="username" hidden="hidden" ><s:property value="username"/></label>
+    <label id="shareDocsNameList" hidden="hidden" ><s:property value="shareDocsNameList"/></label>
+    <label id="shareDocsPathList" hidden="hidden" ><s:property value="shareDocsPathList"/></label>
 
     <div class="container">
         <h3 class='text-left'>您创建的文档：</h3>
@@ -121,8 +113,10 @@
             "</div>"
     }
 
-    var fnameList_coop=document.getElementById("list_coop").innerHTML;
+    var fnameList_coop=document.getElementById("shareDocsNameList").innerHTML;
     fnameList_coop=fnameList_coop.split(",")
+    var fpathList_coop=document.getElementById("shareDocsPathList").innerHTML;
+    fpathList_coop=fpathList_coop.split(",")
     var num_coop;
     if (fnameList_coop[0]=="")
         num_coop=0
@@ -137,17 +131,17 @@
             "</div>"+
             "<form action= 'editAction'  enctype='multipart/form-data' method='post'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-            "<input type='text' style ='display:none' name='path' value='"+path+"\\coop\\"+fnameList_coop[i]+"'>"+
+            "<input type='text' style ='display:none' name='path' value='"+fpathList_coop[i]+"'>"+
             "<button type='submit' class='btn btn-primary '>编辑</button>"+
             "</form>"+
             "<form action= 'downloadAction'  enctype='multipart/form-data' method='post'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-            "<input type='text' style ='display:none' name='path' value='"+path+"\\coop\\"+fnameList_coop[i]+"'>"+
+            "<input type='text' style ='display:none' name='path' value='"+fpathList_coop[i]+"'>"+
             "<button type='submit' class='btn btn-success '>下载</button>"+
             "</form>"+
             "<form action= 'deleteAction'  enctype='multipart/form-data' method='post'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-            "<input type='text' style ='display:none' name='path' value='"+path+"\\coop\\"+fnameList_coop[i]+"'>"+
+            "<input type='text' style ='display:none' name='path' value='"+fpathList_coop[i]+"'>"+
             "<button type='submit' class='btn btn-danger '>删除</button>"+
             "</form>"+
             "</div>"

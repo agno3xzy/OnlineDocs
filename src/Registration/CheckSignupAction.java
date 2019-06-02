@@ -23,7 +23,7 @@ public class CheckSignupAction extends ActionSupport {
         boolean data = false;
         String path = ServletActionContext.getServletContext().getRealPath("/fileUpload/");
         File create=new File(path+"\\"+username+"\\create");
-        File coop=new File(path+"\\"+username+"\\coop");
+        //File coop=new File(path+"\\"+username+"\\coop");
         File log=new File(path+"\\"+username+"\\log");
         //System.out.println(data);
         try {
@@ -37,7 +37,7 @@ public class CheckSignupAction extends ActionSupport {
                 //response.getWriter()得到PrintWriter实例，write 输出
                 writer.write("0");
                 create.mkdirs();
-                coop.mkdirs();
+                //coop.mkdirs();
                 log.mkdirs();
                 //System.out.println("you can regist");
             }else {//不能注册

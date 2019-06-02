@@ -388,9 +388,26 @@ var flag = false
                                 result = result + "ins," + linecount.toString() + "," + position.toString() + "," + textlist[j].toString() + ",true.";
                             }
                         }
-                        if(diffstring == "</p><p>") //在中间新起一行
+                        if(diffstring == "</p><p>") //在中间新起一行 两种情况 新起一行或者把原有一行的一部分换行
                         {
-                            result = result + "ins," + linecount.toString() + "," + position.toString() + "," + "" + ",true.";
+                            var beforedifflist = Array.from(diff[i-1]);
+                            var nextdifflist = Array.from(diff[i+1]);
+                            var beforediffstring = beforedifflist[1];
+                            var nextdiffstring = nextdifflist[1];
+                            var beforedifftype = beforedifflist[0];
+                            var nextdifftype = nextdifflist[0];
+                            if(beforedifftype == 0 && beforediffstring.lastIndexOf("<p>") == beforediffstring.length - 3) //说明是新起一行
+                            {
+                                result = result + "ins," + linecount.toString() + "," + position.toString() + "," + "" + ",true.";
+                            } else
+                            {
+                                console.log(nextdiffstring.indexOf("</p>"));
+                                var alterstring = nextdiffstring.slice(0,nextdiffstring.indexOf("</p>"));
+                                result = result + "del," + linecount.toString() + "," + position.toString() + "," + alterstring.toString() + ",false.";
+                                position = 0;
+                                result = result + "ins," + linecount.toString() + "," + position.toString() + "," + alterstring.toString() + ",true.";
+
+                            }
                         }
                         position = 0;
                     }
@@ -464,50 +481,60 @@ var flag = false
                             var nextdifftype = nextdifflist[0];
                             if(beforedifftype == 0 && nextdifftype == 0)
                             {
-                                if(beforediffstring.lastIndexOf("<p>") == beforediffstring.length - 3 && nextdiffstring.indexOf("</p>") == 0)
+                                if(diffstring == "</p><p>") //只把下一行切到本行
                                 {
-                                    for(var j = 0; j < textlist.length - 1; j++)
-                                    {
-                                        result = result + "del," + linecount.toString() + "," + position.toString() + "," + textlist[j].toString() + ",true.";
-                                        linecount += 1;
-                                    }
-                                    result = result + "del," + linecount.toString() + "," + position.toString() + "," + textlist[textlist.length-1].toString() + ",false.";
+                                    linecount += 1;
+                                    result = result + "del," + linecount.toString() + "," + "0" + "," + nextdiffstring.slice(0,nextdiffstring.indexOf("</p>")) + ",true.";
+                                    result = result + "ins," + (linecount-1).toString() + "," + position.toString() + "," + nextdiffstring.slice(0,nextdiffstring.indexOf("</p>")) + ",false.";
+                                    position = 0;
                                 } else
                                 {
-                                    var isFirstLineDel = true; //第一行是否完全删除
-                                    var firstdelline = linecount; //删除的第一行位置
-                                    var appendposition = position;
-                                    if(beforediffstring.lastIndexOf("<p>") == beforediffstring.length - 3)
+                                    if(beforediffstring.lastIndexOf("<p>") == beforediffstring.length - 3 && nextdiffstring.indexOf("</p>") == 0)
                                     {
-                                        result = result + "del," + linecount.toString() + "," + position.toString() + "," + textlist[0].toString() + ",true.";
-                                    } else
-                                    {
-                                        result = result + "del," + linecount.toString() + "," + position.toString() + "," + textlist[0].toString() + ",false.";
-                                        position = 0;
-                                        isFirstLineDel = false;
-                                    }
-                                    for(var j = 1; j < textlist.length - 1; j++)
-                                    {
-                                        linecount += 1;
-                                        result = result + "del," + linecount.toString() + "," + position.toString() + "," + textlist[j].toString() + ",true.";
-                                    }
-                                    linecount += 1;
-                                    if(nextdiffstring.indexOf("</p>") == 0)
-                                    {
-                                        result = result + "del," + linecount.toString() + "," + position.toString() + "," + textlist[textlist.length-1].toString() + ",true.";
-                                    } else
-                                    {
-                                        if(isFirstLineDel)
+                                        for(var j = 0; j < textlist.length - 1; j++)
                                         {
-                                            result = result + "del," + linecount.toString() + "," + position.toString() + "," + textlist[textlist.length-1].toString() + ",false.";
+                                            result = result + "del," + linecount.toString() + "," + position.toString() + "," + textlist[j].toString() + ",true.";
+                                            linecount += 1;
+                                        }
+                                        result = result + "del," + linecount.toString() + "," + position.toString() + "," + textlist[textlist.length-1].toString() + ",false.";
+                                    } else
+                                    {
+                                        var isFirstLineDel = true; //第一行是否完全删除
+                                        var firstdelline = linecount; //删除的第一行位置
+                                        var appendposition = position;
+                                        if(beforediffstring.lastIndexOf("<p>") == beforediffstring.length - 3)
+                                        {
+                                            result = result + "del," + linecount.toString() + "," + position.toString() + "," + textlist[0].toString() + ",true.";
                                         } else
                                         {
-                                            var appendstring = nextdiffstring.slice(0,nextdiffstring.indexOf("</p>"));
-                                            result = result + "del," + linecount.toString() + "," + position.toString() + "," + textlist[textlist.length-1].toString() + appendstring + ",true.";
-                                            result = result + "ins," + firstdelline.toString() + "," + appendposition.toString() + "," + appendstring.toString() + ",false.";
+                                            result = result + "del," + linecount.toString() + "," + position.toString() + "," + textlist[0].toString() + ",false.";
+                                            position = 0;
+                                            isFirstLineDel = false;
+                                        }
+                                        for(var j = 1; j < textlist.length - 1; j++)
+                                        {
+                                            linecount += 1;
+                                            result = result + "del," + linecount.toString() + "," + position.toString() + "," + textlist[j].toString() + ",true.";
+                                        }
+                                        linecount += 1;
+                                        if(nextdiffstring.indexOf("</p>") == 0)
+                                        {
+                                            result = result + "del," + linecount.toString() + "," + position.toString() + "," + textlist[textlist.length-1].toString() + ",true.";
+                                        } else
+                                        {
+                                            if(isFirstLineDel)
+                                            {
+                                                result = result + "del," + linecount.toString() + "," + position.toString() + "," + textlist[textlist.length-1].toString() + ",false.";
+                                            } else
+                                            {
+                                                var appendstring = nextdiffstring.slice(0,nextdiffstring.indexOf("</p>"));
+                                                result = result + "del," + linecount.toString() + "," + position.toString() + "," + textlist[textlist.length-1].toString() + appendstring + ",true.";
+                                                result = result + "ins," + firstdelline.toString() + "," + appendposition.toString() + "," + appendstring.toString() + ",false.";
+                                            }
                                         }
                                     }
                                 }
+
                             }
                         }
                     }
@@ -542,7 +569,7 @@ var flag = false
         console.log(diff);
         console.log(result);
     }
-    setInterval(timeUpdate,5000);
+    setInterval(timeUpdate,500);
     function updateContent() {
         var a = document.querySelector('#editor-container').children[0].innerHTML;
         document.getElementById("content").value = a;
