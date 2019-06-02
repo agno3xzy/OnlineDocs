@@ -36,7 +36,7 @@ public class HistoryAction extends ActionSupport {
     }
 
     public static String getLogPath(String filePath, boolean type) {
-        String[] path = filePath.split("\\\\");
+        String[] path = filePath.split("/");
         path[path.length - 2] = "log";
         String[] test = path[path.length - 1].split("\\.");
         String filename = path[path.length - 1].split("\\.")[0];
@@ -44,11 +44,11 @@ public class HistoryAction extends ActionSupport {
         if (type == true) {
             String versionLogName = filename + "_version.json";
             path[path.length - 1] = versionLogName;
-            return StringUtils.join(path, "\\");
+            return StringUtils.join(path, "/");
         } else {
             String editLogName = filename + "_edit.json";
             path[path.length - 1] = editLogName;
-            return StringUtils.join(path, "\\");
+            return StringUtils.join(path, "/");
         }
     }
 
@@ -79,6 +79,7 @@ public class HistoryAction extends ActionSupport {
     public String execute() throws FileNotFoundException {
         Gson gson = new Gson();
         this.path = getLogPath(path, true);
+        System.out.println(this.path);
         File versionLogFile = new File(path);
         if (versionLogFile.exists()) {
             String content = new Scanner(versionLogFile).useDelimiter("\\Z").next();
