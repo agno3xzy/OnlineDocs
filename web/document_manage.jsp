@@ -1,6 +1,12 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page import="org.apache.struts2.ServletActionContext" %>
 <%@ page import="java.io.File" %>
+<%@ page import="dao.Dao" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.PreparedStatement" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <%--
   Created by IntelliJ IDEA.
   User: agno3
@@ -24,9 +30,53 @@
         }
         fnameList_create=fnameList_create.substring(0,fnameList_create.length()-1);
     }
+
+    String shareDocsNameList="";
+    String shareDocsPathList="";
+    Dao dao = new Dao();
+    Connection conn = dao.getConnection();
+
+    PreparedStatement p2 = conn.prepareStatement("select * from user " +
+            "where user_name='"+request.getAttribute("username")+"'");
+    ResultSet rs2 = p2.executeQuery();
+    rs2.next();
+    String uid=rs2.getString("iduser");
+
+    PreparedStatement p1 = conn.prepareStatement("select * from cooperate " +
+            "where user_iduser='"+uid+"' and permission='share'");
+    ResultSet rs1 = p1.executeQuery();
+    List<String> shareDocs=new ArrayList<>();
+    boolean hasShare=false;
+    while (rs1.next()){
+        hasShare=true;
+        shareDocs.add(rs1.getString("document_iddocument"));
+    }
+
+    if (hasShare){
+        for (String temp_s:shareDocs){
+            PreparedStatement p3 = conn.prepareStatement(
+                    "select * from document " +
+                            "where iddocument='"+temp_s+"'");
+            ResultSet rs3 = p3.executeQuery();
+            rs3.next();
+            shareDocsNameList+=rs3.getString("document_name")+",";
+            shareDocsPathList+=rs3.getString("text_path")+",";
+            dao.close(rs3,p3);
+        }
+
+        shareDocsNameList = shareDocsNameList.substring(0,shareDocsNameList.length() - 1);
+        shareDocsPathList = shareDocsPathList.substring(0,shareDocsPathList.length() - 1);
+
+    }
+
+    dao.close(rs1,p1);
+    dao.close(rs2,p2);
+    dao.close(conn);
+
 %>
 <html>
 <head>
+    <script src="js/dynamicLoadFile.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
@@ -41,7 +91,7 @@
 
     <title>登陆状态</title>
 </head>
-<body>
+<body onload="dynamic()">
 
 <div class="alert alert-success" role="alert" style="text-align: center">
     <h4 class="alert-heading" >Well done,  <s:property value="username"/> !</h4>
@@ -52,8 +102,8 @@
     <label id="list_create" hidden="hidden" ><%=fnameList_create %></label>
     <label id="path" hidden="hidden" ><%=path %></label>
     <label id="username" hidden="hidden" ><s:property value="username"/></label>
-    <label id="shareDocsNameList" hidden="hidden" ><s:property value="shareDocsNameList"/></label>
-    <label id="shareDocsPathList" hidden="hidden" ><s:property value="shareDocsPathList"/></label>
+    <label id="shareDocsNameList" hidden="hidden" ><%=shareDocsNameList %></label>
+    <label id="shareDocsPathList" hidden="hidden" ><%=shareDocsPathList %></label>
 
     <div class="container">
         <h3 class='text-left'>您创建的文档：</h3>
@@ -72,80 +122,5 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-
-    var path=document.getElementById("path").innerHTML;
-    var username=document.getElementById("username").innerHTML;
-    var fnameList_create=document.getElementById("list_create").innerHTML;
-    fnameList_create=fnameList_create.split(",");
-    var num_create;
-    if (fnameList_create[0]=="")
-        num_create=0
-    else
-        num_create=fnameList_create.length;
-    for (var i=0;i<num_create;i++)
-    {
-        document.getElementById("creat_list").innerHTML+=
-            "<div class='row bg-info'>"+
-            "<div class='col text-left'>"+
-            fnameList_create[i]+
-            "</div>"+
-            "<form action= 'editAction'  enctype='multipart/form-data' method='post'>"+
-            "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-            "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
-            "<button type='submit' class='btn btn-primary '>编辑</button>"+
-            "</form>"+
-            "<form action= 'downloadAction'  enctype='multipart/form-data' method='post'>"+
-            "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-            "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
-            "<button type='submit' class='btn btn-success '>下载</button>"+
-            "</form>"+
-            "<form action= 'deleteAction'  enctype='multipart/form-data' method='post'>"+
-            "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-            "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
-            "<button type='submit' class='btn btn-danger '>删除</button>"+
-            "</form>"+
-            "<form action= 'historyAction'  enctype='multipart/form-data' method='post'>"+
-            "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-            "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
-            "<button type='submit' class='btn btn-success '>历史</button>"+
-            "</form>"+
-            "</div>"
-    }
-
-    var fnameList_coop=document.getElementById("shareDocsNameList").innerHTML;
-    fnameList_coop=fnameList_coop.split(",")
-    var fpathList_coop=document.getElementById("shareDocsPathList").innerHTML;
-    fpathList_coop=fpathList_coop.split(",")
-    var num_coop;
-    if (fnameList_coop[0]=="")
-        num_coop=0
-    else
-        num_coop=fnameList_coop.length;
-    for (var i=0;i<num_coop;i++)
-    {
-        document.getElementById("coop_list").innerHTML+=
-            "<div class='row bg-info'>"+
-            "<div class='col text-left'>"+
-            fnameList_coop[i]+
-            "</div>"+
-            "<form action= 'editAction'  enctype='multipart/form-data' method='post'>"+
-            "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-            "<input type='text' style ='display:none' name='path' value='"+fpathList_coop[i]+"'>"+
-            "<button type='submit' class='btn btn-primary '>编辑</button>"+
-            "</form>"+
-            "<form action= 'downloadAction'  enctype='multipart/form-data' method='post'>"+
-            "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-            "<input type='text' style ='display:none' name='path' value='"+fpathList_coop[i]+"'>"+
-            "<button type='submit' class='btn btn-success '>下载</button>"+
-            "</form>"+
-            "<form action= 'deleteAction'  enctype='multipart/form-data' method='post'>"+
-            "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-            "<input type='text' style ='display:none' name='path' value='"+fpathList_coop[i]+"'>"+
-            "<button type='submit' class='btn btn-danger '>删除</button>"+
-            "</form>"+
-            "</div>"
-    }
-</script>
 </body>
 </html>

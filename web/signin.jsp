@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="js/loadShareList.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
@@ -27,7 +28,7 @@
 <h1 style="text-align: center;margin-top: 50px;margin-bottom: 200px">OnlineDocs 用户登录</h1>
 <div class="mx-auto" style="width: 500px;">
 
-    <form action="Signin.action" method="post">
+    <form action="Signin.action" enctype="multipart/form-data" method="post">
         <div class="alert alert-danger" role="alert" id="alert" style="visibility:hidden;">
         </div>
         <div class="form-group row">
@@ -55,49 +56,6 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    function checklogin(){
-        var xhr = new XMLHttpRequest();
-        var urlString = "passwordCheck.action?username="
-            + document.getElementById("username").value;
-        //window.alert(document.getElementById("username").value);
-        xhr.open("post",urlString,true);
-        xhr.send(null);
-
-
-
-        //检查响应状态
-        xhr.onreadystatechange = function() {
-            if(xhr.readyState == 4) {
-                if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
-                    //console.log(xhr.responseText);
-                    //console.log(document.getElementById("password").value);
-                    if(xhr.responseText == "") {
-                        document.getElementById("alert").style.visibility = "visible";
-                        $("#alert").html("用户名或密码错误");
-                    } else {
-                        if(xhr.responseText== document.getElementById("password").value)
-                        {
-                            document.getElementById("alert").style.visibility = "hidden";
-                        } else
-                        {
-                            document.getElementById("alert").style.visibility = "visible";
-                            $("#alert").html("用户名或密码错误");
-                        }
-                    }
-                }
-            }
-        };
-    }
-    function validate() {
-        if(document.getElementById("alert").style.visibility == "visible") {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-</script>
 </body>
 </html>
 

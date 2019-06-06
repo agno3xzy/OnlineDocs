@@ -20,7 +20,8 @@
     Connection conn = dao.getConnection();
 
     try {
-        PreparedStatement p1 = conn.prepareStatement("select * from document where text_path='" + path + "'");
+        PreparedStatement p1 = conn.prepareStatement("select * from document where text_path='"
+                + path.replace("\\","/") + "'");
         ResultSet rs1 = p1.executeQuery();
         rs1.next();
         docID = rs1.getString("iddocument");

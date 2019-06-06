@@ -12,7 +12,7 @@ import java.sql.ResultSet;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 
 public class EditAction {
-
+    String username;
     String path;
     String content;
     String docOwner;
@@ -47,19 +47,29 @@ public class EditAction {
         this.content = content;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String execute()
     {
         try{
             Dao dao = new Dao();
             Connection conn = dao.getConnection();
 
-            PreparedStatement p1 = conn.prepareStatement("select * from document where text_path='"+path+"'");
+            PreparedStatement p1 = conn.prepareStatement("select * from document where text_path='"
+                    +path.replace("\\","/")+"'");
             ResultSet rs1 = p1.executeQuery();
             rs1.next();
             docID = rs1.getString("iddocument");
 
 
-            PreparedStatement p2 = conn.prepareStatement("select * from cooperate where document_iddocument='" + docID +"'" +"AND permission='" + "share" +"'");
+            PreparedStatement p2 = conn.prepareStatement("select * from cooperate where document_iddocument='"
+                    + docID +"'" +"AND permission='" + "share" +"'");
             ResultSet rs2 = p2.executeQuery();
 
             while(rs2.next())
@@ -67,7 +77,8 @@ public class EditAction {
                 docSharer+=rs2.getString("user_iduser");
             }
 
-            PreparedStatement p3 = conn.prepareStatement("select * from cooperate where document_iddocument='" + docID + "'" + "AND permission='" + "own" +"'");
+            PreparedStatement p3 = conn.prepareStatement("select * from cooperate where document_iddocument='"
+                    + docID + "'" + "AND permission='" + "own" +"'");
             ResultSet rs3 = p3.executeQuery();
             rs3.next();
             docOwner = rs3.getString("user_iduser");

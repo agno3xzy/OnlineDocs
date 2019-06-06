@@ -10,8 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 public class SigninAction extends ActionSupport{
-    String username;
-    String password;
+    private String username;
+    private String password;
 
     @Override
     public String execute() {
@@ -33,5 +33,4 @@ public class SigninAction extends ActionSupport{
     public void setPassword (String password){
         this.password = password;
     }
-
 }

@@ -24,7 +24,7 @@ public class DeleteAction {
             Connection conn = dao.getConnection();
 
             PreparedStatement p2 = conn.prepareStatement("select * from document " +
-                    "where text_path='"+path+"'");
+                    "where text_path='"+path.replace("\\","/")+"'");
             ResultSet rs2 = p2.executeQuery();
             rs2.next();
             String id=rs2.getString("iddocument");

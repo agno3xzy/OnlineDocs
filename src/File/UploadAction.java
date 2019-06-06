@@ -25,6 +25,8 @@ public class UploadAction {
         for(int i = 0;i<fileUpload.length;i++){
             File log=new File(path+"\\"+username+"\\log");
             FileUtils.copyFile(fileUpload[i],new File(path+"\\"+ username + "\\create\\" + fileUploadFileName[i]));
+            String[] s=fileUploadFileName[i].split("\\.");
+            FileUtils.copyFile(fileUpload[i],new File(path+"\\"+ username + "\\create\\" + s[0]+"_t."+s[1]));
             log.mkdirs();
             try
             {
@@ -36,8 +38,8 @@ public class UploadAction {
                         "VALUES ('"+fileUploadFileName[i]+"','"+
                         DateFormat.getDateTimeInstance(2, 2, Locale.CHINESE).format(new java.util.Date()) +
                         "','"+ DateFormat.getDateTimeInstance(2, 2, Locale.CHINESE).format(new java.util.Date()) +
-                        "','"+path+"\\"+ username + "\\create\\" + fileUploadFileName[i]+
-                        "','"+path+"\\"+ username + "\\log\\" + fileUploadFileName[i]+"')";
+                        "','"+path.replace("\\","/")+ username + "/create/" + fileUploadFileName[i]+
+                        "','"+path.replace("\\","/")+ username + "/log/" + fileUploadFileName[i]+"')";
                 sm1.execute(sql1);
 
                 PreparedStatement p1 = conn.prepareStatement("select * from user where user_name='"+username+"'");
@@ -45,7 +47,7 @@ public class UploadAction {
                 rs1.next();
 
                 PreparedStatement p2 = conn.prepareStatement("select * from document " +
-                        "where text_path='"+path+"\\"+ username + "\\create\\" + fileUploadFileName[i]+"'");
+                        "where text_path='"+path.replace("\\","/")+username + "/create/" + fileUploadFileName[i]+"'");
                 ResultSet rs2 = p2.executeQuery();
                 rs2.next();
 

@@ -24,13 +24,13 @@ public class FileOperation {
         this.optable=optable;
         this.oldFile=new File(oldFilePath);
         this.newFile=new File(newFilePath);
-        try{
-            this.newFile.createNewFile();
-            copyFile(this.oldFile,this.newFile);
-        }
-        catch (Exception e){
-
-        }
+//        try{
+//            this.newFile.createNewFile();
+//            copyFile(this.oldFile,this.newFile);
+//        }
+//        catch (Exception e){
+//
+//        }
     }
 
     //记录日志时获取上一次记录日志后的所有操作序列
