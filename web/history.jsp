@@ -25,14 +25,21 @@
 <body>
 <div class="list-group">
     <s:iterator value="versionLog" status="L">
+        <form action= 'versionAction'  enctype='multipart/form-data' method='post'>
         <button type="button" class="list-group-item list-group-item-action">
             <p class="font-weight-bold">
                 <s:property value="key"/>
             </p>
+           <%--
             <li style="color: <s:property value="color[#L.index]"/>">
                 <s:property value="value"/>
             </li>
+            --%>
+            <input type='text' style='display:none' name='timestamp' value='<s:property value="key"/>'>
+            <input type='text' style ='display:none' name='logpath' value='<s:property value="path"/>'>
+            <input type='submit'   value='revert'>
         </button>
+        </form>
     </s:iterator>
 </div>
 </body>

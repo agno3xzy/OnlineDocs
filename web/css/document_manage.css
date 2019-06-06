@@ -1,0 +1,14 @@
+#create_part{
+     margin-top:50px;
+ }
+#upload{
+    margin-right:20px;
+    margin-top:20px;
+}
+.create_item:hover{
+    background-color:#dddddd;
+}
+
+.coop_item:hover{
+    background-color:#dddddd;
+}
