@@ -6,6 +6,7 @@ public class ConfirmShareSigninAction {
     String username;
     String password;
     String docID;
+    String authority;
 
     public String execute() {
         return SUCCESS;
@@ -30,5 +31,9 @@ public class ConfirmShareSigninAction {
     public String getDocID(){return this.docID;}
 
     public void setDocID(String docID){this.docID=docID;}
+
+    public String getAuthority(){return this.authority;}
+
+    public void setAuthority(String authority){this.authority=authority;}
 
 }

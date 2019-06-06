@@ -17,6 +17,8 @@
 <%
     String docID = request.getParameter("docID");
     String username = request.getParameter("username");
+    String authority = request.getParameter("authority");
+    String userID = " ";
     Dao dao = new Dao();
     Connection conn = dao.getConnection();
     String docName =" ";
@@ -25,6 +27,11 @@
         ResultSet rs1 = p1.executeQuery();
         rs1.next();
         docName = rs1.getString("document_name");
+
+        PreparedStatement p2 = conn.prepareStatement("select * from user where user_name='" + username + "'");
+        ResultSet rs2 = p2.executeQuery();
+        rs2.next();
+        userID = rs2.getString("iduser");
     }
     catch (Exception e)
     {
@@ -44,5 +51,12 @@
 <p><%=username%>用户你好</p>
 <p><%=docName%></p>
 <p><%=docID%></p>
+<p>获得的权限为<%=authority%></p>
+<form action="ConfirmAction" enctype='multipart/form-data' method='post'>
+    <input hidden="hidden" name="userID" value=<%=userID%>>
+    <input hidden="hidden" name="docID" value=<%=docID%>>
+    <input hidden="hidden" name="authority" value=<%=authority%>>
+    <button type="submit">确认</button>
+</form>
 </body>
 </html>

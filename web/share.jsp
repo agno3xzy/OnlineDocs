@@ -14,6 +14,7 @@
 
     String docName = request.getParameter("docName");
     String path = request.getParameter("path");
+    String authority = request.getParameter("authority");
     String docID =" ";
 
     Dao dao = new Dao();
@@ -45,6 +46,7 @@
 
 <p id="docID" hidden="hidden"><%=docID%></p>
 <p id="path" hidden="hidden"><%=path%></p>
+<p id="authority" hidden="hidden"><%=authority%></p>
 
 
 <p>您要分享的文档为:<%=docName%></p>
@@ -55,10 +57,11 @@
 <script>
     function createLink() {
         var docID = document.getElementById("docID").innerHTML;
+        var authority = document.getElementById("authority").innerHTML;
         var curURL = self.location.href;
         var index = curURL.lastIndexOf("/");
         var a = document.getElementById("shareLink");
-        a.innerHTML = curURL.substring(0,index)+"/confirm_share_login.jsp?docID=" + docID;
+        a.innerHTML = curURL.substring(0,index)+"/confirm_share_login.jsp?docID=" + docID+"&authority="+authority;
     }
 
 </script>

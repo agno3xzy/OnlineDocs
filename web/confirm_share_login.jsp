@@ -13,7 +13,8 @@
 <%@ page import="java.sql.ResultSet" %>
 <%
     HttpServletRequest reqeust= ServletActionContext.getRequest();
-    String docID=reqeust.getParameter("docID");//字符串
+    String docID=reqeust.getParameter("docID");
+    String authority = reqeust.getParameter("authority");
 
 %>
 <html>
@@ -38,6 +39,7 @@
 
     <form action="ConfirmShareSigninAction.action" method="post">
         <input type="hidden" name="docID" value=<%=docID%> />
+        <input type="hidden" name="authority" value=<%=authority%> />
         <div class="alert alert-danger" role="alert" id="alert" style="visibility:hidden;">
         </div>
         <div class="form-group row">
