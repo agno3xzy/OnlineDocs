@@ -12,7 +12,7 @@
 
 <%
     String path=ServletActionContext.getServletContext().getRealPath("/fileUpload/") + request.getAttribute("username");
-    File file_create = new File(path  + "\\create\\");
+    File file_create = new File(path  + "/create/");
     File[] fileList_create = file_create.listFiles();
     String fnameList_create="";
 
@@ -38,38 +38,51 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="/css/document_manage.css" type="text/css">
     <title>登陆状态</title>
 </head>
 <body>
+<label id="list_create" hidden="hidden" ><%=fnameList_create %></label>
+<label id="path" hidden="hidden" ><%=path %></label>
+<label id="username" hidden="hidden" ><s:property value="username"/></label>
+<label id="shareDocsNameList" hidden="hidden" ><s:property value="shareDocsNameList"/></label>
+<label id="shareDocsPathList" hidden="hidden" ><s:property value="shareDocsPathList"/></label>
 
-<div class="alert alert-success" role="alert" style="text-align: center">
-    <h4 class="alert-heading" >Well done,  <s:property value="username"/> !</h4>
-    <p>Aww yeah, you have successfully login in!</p>
-    <hr>
-    <p class="mb-0">Start OnlineDocs Now!</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">OnlineDocs</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <label id="list_create" hidden="hidden" ><%=fnameList_create %></label>
-    <label id="path" hidden="hidden" ><%=path %></label>
-    <label id="username" hidden="hidden" ><s:property value="username"/></label>
-    <label id="shareDocsNameList" hidden="hidden" ><s:property value="shareDocsNameList"/></label>
-    <label id="shareDocsPathList" hidden="hidden" ><s:property value="shareDocsPathList"/></label>
-
-    <div class="container">
-        <h3 class='text-left'>您创建的文档：</h3>
-        <div id="creat_list" class="container">
-        </div>
-        <form action= "uploadAction"    enctype="multipart/form-data" method="post"  >
-            <input type="text" style ="display:none" name="username" value=<s:property value="username"/> >
-            上传文件<input type="file" name="fileUpload"  />
-            <button type='submit' class='btn btn-success ' >提交</button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
+</nav>
 
-    <div class="container">
-        <h3 class='text-left'>您合作的文档：</h3>
-        <div id="coop_list" class="container">
-        </div>
+<form action= "uploadAction"    enctype="multipart/form-data" method="post" id="upload" align="right" >
+    <input type="text" style ="display:none" name="username" value=<s:property value="username"/> >
+    <span><strong>上传新文件：</strong></span><input type="file" name="fileUpload"/>
+    <button type='submit' class='btn btn-success' style="margin-left:-50px;">提交</button>
+</form>
+
+<div class="container" id="create_part">
+    <h3 class='text-left'>您创建的文档：</h3>
+    <div id="creat_list" class="container">
+    </div>
+</div>
+
+<div class="container" id="coop_part">
+    <h3 class='text-left'>您合作的文档：</h3>
+    <div id="coop_list" class="container">
     </div>
 </div>
 <script type="text/javascript">
@@ -86,31 +99,31 @@
     for (var i=0;i<num_create;i++)
     {
         document.getElementById("creat_list").innerHTML+=
-            "<div class='row bg-info'>"+
-            "<div class='col text-left'>"+
+            "<div class='row create_item' style='padding-right:20px'>"+
+            "<div class='col text-left' style='margin-top:20px;'>"+
             fnameList_create[i]+
             "</div>"+
             "<form action= 'editAction'  enctype='multipart/form-data' method='post'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-            "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
-            "<button type='submit' class='btn btn-primary '>编辑</button>"+
+            "<input type='text' style ='display:none' name='path' value='"+path+"/create/"+fnameList_create[i]+"'>"+
+            "<button type='submit' class='btn btn-primary ' style='margin-top:15px;'>编辑</button>"+
             "</form>"+
-            "<form action= 'downloadAction'  enctype='multipart/form-data' method='post'>"+
+            "<form action= 'downloadAction'  enctype='multipart/form-data' method='post' style='margin-left:10px;'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-            "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
-            "<button type='submit' class='btn btn-success '>下载</button>"+
+            "<input type='text' style ='display:none' name='path' value='"+path+"/create/"+fnameList_create[i]+"'>"+
+            "<button type='submit' class='btn btn-success ' style='margin-top:15px;'>下载</button>"+
             "</form>"+
-            "<form action= 'deleteAction'  enctype='multipart/form-data' method='post'>"+
+            "<form action= 'deleteAction'  enctype='multipart/form-data' method='post' style='margin-left:10px;'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-            "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
-            "<button type='submit' class='btn btn-danger '>删除</button>"+
+            "<input type='text' style ='display:none' name='path' value='"+path+"/create/"+fnameList_create[i]+"'>"+
+            "<button type='submit' class='btn btn-danger ' style='margin-top:15px;'>删除</button>"+
             "</form>"+
-            "<form action= 'historyAction'  enctype='multipart/form-data' method='post'>"+
+            "<form action= 'historyAction'  enctype='multipart/form-data' method='post' style='margin-left:10px;'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-            "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
-            "<button type='submit' class='btn btn-success '>历史</button>"+
+            "<input type='text' style ='display:none' name='path' value='"+path+"/create/"+fnameList_create[i]+"'>"+
+            "<button type='submit' class='btn btn-success ' style='margin-top:15px;'>历史</button>"+
             "</form>"+
-            "</div>"
+            "</div>";
     }
 
     var fnameList_coop=document.getElementById("shareDocsNameList").innerHTML;
@@ -125,24 +138,24 @@
     for (var i=0;i<num_coop;i++)
     {
         document.getElementById("coop_list").innerHTML+=
-            "<div class='row bg-info'>"+
-            "<div class='col text-left'>"+
+            "<div class='row coop_item' style='padding-right:20px'>"+
+            "<div class='col text-left' style='margin-top:20px;'>"+
             fnameList_coop[i]+
             "</div>"+
             "<form action= 'editAction'  enctype='multipart/form-data' method='post'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
             "<input type='text' style ='display:none' name='path' value='"+fpathList_coop[i]+"'>"+
-            "<button type='submit' class='btn btn-primary '>编辑</button>"+
+            "<button type='submit' class='btn btn-primary ' style='margin-top:15px;'>编辑</button>"+
             "</form>"+
             "<form action= 'downloadAction'  enctype='multipart/form-data' method='post'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
             "<input type='text' style ='display:none' name='path' value='"+fpathList_coop[i]+"'>"+
-            "<button type='submit' class='btn btn-success '>下载</button>"+
+            "<button type='submit' class='btn btn-success ' style='margin-top:15px;'>下载</button>"+
             "</form>"+
             "<form action= 'deleteAction'  enctype='multipart/form-data' method='post'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
             "<input type='text' style ='display:none' name='path' value='"+fpathList_coop[i]+"'>"+
-            "<button type='submit' class='btn btn-danger '>删除</button>"+
+            "<button type='submit' class='btn btn-danger ' style='margin-top:15px;'>删除</button>"+
             "</form>"+
             "</div>"
     }
