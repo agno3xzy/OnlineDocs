@@ -88,7 +88,7 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/document_manage.css" type="text/css">
+    <link rel="stylesheet" href="css/document_manage.css" type="text/css">
     <title>登陆状态</title>
 </head>
 <body onload="dynamic()">
@@ -118,7 +118,7 @@
     </div>
 </nav>
 
-<form action= "uploadAction"    enctype="multipart/form-data" method="post" id="upload" align="right" >
+<form action= "uploadAction"  enctype="multipart/form-data" method="post" id="upload" align="right" >
     <input type="text" style ="display:none" name="username" value=<s:property value="username"/> >
     <span><strong>上传新文件：</strong></span><input type="file" name="fileUpload"/>
     <button type='submit' class='btn btn-success' style="margin-left:-50px;">提交</button>

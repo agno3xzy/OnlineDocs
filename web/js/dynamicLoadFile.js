@@ -11,8 +11,8 @@ function dynamic(){
     for (var i=0;i<num_create;i++)
     {
         document.getElementById("creat_list").innerHTML+=
-            "<div class='row bg-info'>"+
-            "<div class='col text-left'>"+
+            "<div class='row create_item' style='padding-right:20px'>"+
+            "<div class='col text-left' style='margin-top:20px;'>"+
             fnameList_create[i]+
             "</div>"+
             "<form action= 'editAction'  enctype='multipart/form-data' method='post'>"+
@@ -50,8 +50,8 @@ function dynamic(){
     for (var i=0;i<num_coop;i++)
     {
         document.getElementById("coop_list").innerHTML+=
-            "<div class='row bg-info'>"+
-            "<div class='col text-left'>"+
+            "<div class='row create_item' style='padding-right:20px'>"+
+            "<div class='col text-left' style='margin-top:20px;'>"+
             fnameList_coop[i]+
             "</div>"+
             "<form action= 'editAction'  enctype='multipart/form-data' method='post'>"+

@@ -43,14 +43,6 @@ function replaceAll(str1,str2)
     return str1;
 }
 
-var quill = new Quill('#editor-container', {
-    modules: {
-        toolbar: '#toolbar-container'
-    },
-    placeholder: 'Compose an epic...',
-    theme: 'snow'
-});
-
 var content;
 var new_content;
 var flag = false;

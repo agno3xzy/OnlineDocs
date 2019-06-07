@@ -26,7 +26,6 @@
     <script src="js/DiffToStringArray.js"></script>
     <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
-    <script src="jquery-3.2.0.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/guide.css"/>
 
 </head>
@@ -191,18 +190,15 @@
 
 
 <!-- Include the Quill library -->
-<script src="js/quill.js"></script>
+<script type="text/javascript" src="js/quill.js"></script>
 <script type="text/javascript" src="js/diff_match_patch.js"></script>
 <script type="text/javascript" src="js/diff.js"></script>
 <!-- Initialize Quill editor -->
 
-<script>
-    //var BackgroundClass = Quill.import('attributors/class/background');
-    //var ColorClass = Quill.import('attributors/class/color');
-    //var SizeStyle = Quill.import('attributors/style/size');
-    //Quill.register(BackgroundClass, true);
-    //Quill.register(ColorClass, true);
-    //Quill.register(SizeStyle, true);
+
+
+<script type="text/javascript">
+    setInterval(timeUpdate,1000);
 
     var quill = new Quill('#editor-container', {
         modules: {
@@ -211,13 +207,6 @@
         placeholder: 'Compose an epic...',
         theme: 'snow'
     });
-
-</script>
-
-
-<script type="text/javascript">
-    setInterval(timeUpdate,1000);
-
 </script>
 
 
