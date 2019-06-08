@@ -11,47 +11,27 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 
 public class SaveFileAction {
 
-    String path;
-    String content;
-    String filename;
+    String newPath;
+    String oldPath;
+    String username;
 
-    public String getPath() {
-        return this.path;
-    }
+    public String getUsername() {return username;}
 
-    public void setPath(String path) {
-        this.path = path;
-        String[] pathArray = path.split("/");
-        this.filename = pathArray[pathArray.length - 1];
-        System.out.print(this.filename);
-    }
+    public void setUsername(String username) {this.username = username;}
 
-    public String getContent() {
-        return this.content;
-    }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+    public String getOldPath(){return oldPath;}
 
-    public String getFilename() {
-        return this.filename;
-    }
+    public void setOldPath(String oldPath){this.oldPath=oldPath;}
+
+    public String getNewPath(){return newPath;}
+
+    public void setNewPath(String newPath){this.newPath=newPath;}
 
     public String execute() throws IOException {
 
-        File file = new File(path);
 
-        if (!file.exists()) {
-            file.createNewFile();
-        }
-
-        FileOutputStream out = new FileOutputStream(file);
-        out.write(content.getBytes());
-        out.close();
-
-
-        return SUCCESS;
+        return null;
     }
 
 }

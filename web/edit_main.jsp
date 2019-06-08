@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
     <script src="js/DiffToStringArray.js"></script>
+    <script src="js/saveFile.js"></script>
     <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/guide.css"/>
@@ -175,7 +176,7 @@
         <input hidden="hidden" name="path" value=<s:property value="oldpath"/>>
         <input hidden="hidden" name="username" value=<s:property value="username"/>>
         <input hidden="hidden" name="content"/>
-        <input type="submit" class="btn btn-primary" onclick="updateContent()" value="保存文件"/>
+        <input type="submit" class="btn btn-primary" onclick="saveFile()" value="保存文件"/>
     </form>
 </div>
 
