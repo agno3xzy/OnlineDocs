@@ -51,9 +51,7 @@
             <result name="input">/upload_fail.jsp</result>
         </action>
 
-        <action name="FileSaveAction" class="File.SaveFileAction">
-
-        </action>
+        <action name="FileSaveAction" class="File.SaveFileAction"></action>
         <action name="historyAction" class="File.HistoryAction" >
             <result>/history.jsp</result>
         </action>

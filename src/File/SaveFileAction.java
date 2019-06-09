@@ -1,5 +1,6 @@
 package File;
 
+import com.opensymphony.xwork2.ActionSupport;
 import com.sun.net.httpserver.Authenticator;
 
 import java.io.*;
@@ -9,7 +10,7 @@ import java.io.IOException;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 
-public class SaveFileAction {
+public class SaveFileAction extends ActionSupport {
 
     String newPath;
     String oldPath;
@@ -28,6 +29,7 @@ public class SaveFileAction {
 
     public void setNewPath(String newPath){this.newPath=newPath;}
 
+    @Override
     public String execute() throws IOException {
 
 

@@ -5,16 +5,8 @@
   Time: 15:12
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page import="dao.Dao" %>
-<%@ page import="java.sql.Connection" %>
-<%@ page import="java.sql.PreparedStatement" %>
-<%@ page import="java.sql.ResultSet" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="File.*" %>
-<%@page import="java.io.BufferedReader" %>
-<%@page import="java.io.FileReader" %>
-<%@page import="java.io.File" %>
 <html>
 <head>
     <title>编辑文档界面</title>
@@ -31,45 +23,6 @@
 
 </head>
 <body onload="loadContent()">
-
-<%
-
-    Dao dao = new Dao();
-    Connection conn = dao.getConnection();
-    String docName = " ";
-
-    String oldpath = request.getParameter("path");
-    String[] string_t=request.getParameter("path").split("\\\\");
-    String[] string_tt=string_t[string_t.length-1].split("\\.");
-    string_tt[0]+="_t";
-    string_t[string_t.length-1]=String.join(".",string_tt);
-    String newpath = String.join("\\",string_t);   // 这边文件目录需改成相对路径
-    String content = request.getParameter("content");
-    String docOwner = request.getParameter("docOwner");
-    String docSharer = request.getParameter("docSharer");
-
-    try {
-        PreparedStatement p1 = conn.prepareStatement("select * from document where text_path='"
-                + oldpath.replace("\\","/") + "'");
-        ResultSet rs1 = p1.executeQuery();
-        rs1.next();
-        docName = rs1.getString("document_name");
-    }
-    catch (Exception e)
-    {
-        e.printStackTrace();
-    }
-    File file = new File(newpath);
-    FileReader fr = new FileReader(file);  //字符输入流
-    BufferedReader br = new BufferedReader(fr);  //使文件可按行读取并具有缓冲功能
-    StringBuffer strB = new StringBuffer();   //strB用来存储jsp.txt文件里的内容
-    String str = br.readLine();
-    while (str != null) {
-        strB.append(str);   //将读取的内容放入strB
-        str = br.readLine();
-    }
-    br.close();    //关闭输入流
-%>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">OnlineDocs</a>
@@ -94,15 +47,15 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
                     <form action="ShareAction" enctype='multipart/form-data' method='post'>
-                        <input hidden="hidden" name="docName" value=<%=docName%>>
-                        <input hidden="hidden" name="path" value=<%=oldpath%>>
+                        <input hidden="hidden" name="docName" value=<s:property value="docName"/>>
+                        <input hidden="hidden" name="path" value=<s:property value="oldPath"/>>
                         <input hidden="hidden" name="authority" value="查看">
                         <button type="submit">分享查看权限</button>
                     </form>
 
                         <form action="ShareAction" enctype='multipart/form-data' method='post'>
-                            <input hidden="hidden" name="docName" value=<%=docName%>>
-                            <input hidden="hidden" name="path" value=<%=oldpath%>>
+                            <input hidden="hidden" name="docName" value=<s:property value="docName"/>>
+                            <input hidden="hidden" name="path" value=<s:property value="oldPath"/>>
                             <input hidden="hidden" name="authority" value="编辑">
                             <button type="submit">分享编辑权限</button>
                         </form>
@@ -118,13 +71,13 @@
         </form>
     </div>
 </nav>
-
+<div class="alert alert-success" role="alert" id="save_success" style="visibility: hidden;position:absolute;top:40%;left:40%;">保存成功！</div>
 <div class="row" style="margin-top: 50px">
     <div class="col-4" style="margin-top: 50px">
         <nav class="navbar flex-column navbar-light bg-light">
             <span class="navbar-brand mb-0 h1">文档信息：</span>
-            <span class="navbar-brand mb-0 h1">创建者：<label value=<%=docOwner%>/></span>
-            <span class="navbar-brand mb-0 h1">共享合作者：<label value=<%=docSharer%>/></span>
+            <span class="navbar-brand mb-0 h1">创建者：<s:property value="docOwner"/></span>
+            <span class="navbar-brand mb-0 h1">共享合作者：<s:property value="docSharer"/></span>
         </nav>
     </div>
     <div class="col-8">
@@ -168,16 +121,11 @@
     </div>
 </div>
 <label id="username" hidden="hidden" ><s:property value="username"/></label>
-<label id="oldpath" hidden="hidden" ><%=oldpath%></label>
-<label id="newpath" hidden="hidden" ><%=newpath%></label>
+<label id="oldpath" hidden="hidden" ><s:property value="oldPath"/></label>
+<label id="newpath" hidden="hidden" ><s:property value="newPath"/></label>
 
 <div style="text-align: center;margin-top: 50px">
-    <form id="saveFileForm" action="FileSaveAction" enctype='multipart/form-data' method='post'>
-        <input hidden="hidden" name="path" value=<s:property value="oldpath"/>>
-        <input hidden="hidden" name="username" value=<s:property value="username"/>>
-        <input hidden="hidden" name="content"/>
-        <input type="submit" class="btn btn-primary" onclick="saveFile()" value="保存文件"/>
-    </form>
+    <button class="btn btn-primary" onclick="saveFile()" >保存文件</button>
 </div>
 
 <div class="guide">
@@ -186,8 +134,7 @@
         <a href="javascript:history.back(-1)" class="report" title="返回"><span>返回</span></a>
     </div>
 </div>
-<label id="existFileContent" hidden="hidden"><%=strB%></label>
-<label id="updatedContent" hidden="hidden"><%=content%></label>
+<label id="existFileContent" hidden="hidden"><s:property value="content"/></label>
 
 
 <!-- Include the Quill library -->
@@ -199,7 +146,7 @@
 
 
 <script type="text/javascript">
-    setInterval(timeUpdate,1000);
+    setInterval(timeUpdate,5000);
 
     var quill = new Quill('#editor-container', {
         modules: {

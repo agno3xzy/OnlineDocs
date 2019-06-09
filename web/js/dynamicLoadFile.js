@@ -18,22 +18,22 @@ function dynamic(){
             "<form action= 'editAction'  enctype='multipart/form-data' method='post'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
             "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
-            "<button type='submit' class='btn btn-primary '>编辑</button>"+
+            "<button type='submit' class='btn btn-primary ' style='margin-top:15px;margin-right: 15px;'>编辑</button>"+
             "</form>"+
             "<form action= 'downloadAction'  enctype='multipart/form-data' method='post'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
             "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
-            "<button type='submit' class='btn btn-success '>下载</button>"+
+            "<button type='submit' class='btn btn-success ' style='margin-top:15px;margin-right: 15px;'>下载</button>"+
             "</form>"+
             "<form action= 'deleteAction'  enctype='multipart/form-data' method='post'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
             "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
-            "<button type='submit' class='btn btn-danger '>删除</button>"+
+            "<button type='submit' class='btn btn-danger ' style='margin-top:15px;margin-right: 15px;'>删除</button>"+
             "</form>"+
             "<form action= 'historyAction'  enctype='multipart/form-data' method='post'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
             "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
-            "<button type='submit' class='btn btn-success '>历史</button>"+
+            "<button type='submit' class='btn btn-success ' style='margin-top:15px;margin-right: 15px;'>历史</button>"+
             "</form>"+
             "</div>"
     }
@@ -57,22 +57,22 @@ function dynamic(){
             "<form action= 'editAction'  enctype='multipart/form-data' method='post'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
             "<input type='text' style ='display:none' name='path' value='"+fpathList_coop[i]+"'>"+
-            "<button type='submit' class='btn btn-primary '>编辑</button>"+
+            "<button type='submit' class='btn btn-primary ' style='margin-top:15px;margin-right: 15px;'>编辑</button>"+
             "</form>"+
             "<form action= 'downloadAction'  enctype='multipart/form-data' method='post'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
             "<input type='text' style ='display:none' name='path' value='"+fpathList_coop[i]+"'>"+
-            "<button type='submit' class='btn btn-success '>下载</button>"+
+            "<button type='submit' class='btn btn-success ' style='margin-top:15px;margin-right: 15px;'>下载</button>"+
             "</form>"+
             "<form action= 'deleteAction'  enctype='multipart/form-data' method='post'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
             "<input type='text' style ='display:none' name='path' value='"+fpathList_coop[i]+"'>"+
-            "<button type='submit' class='btn btn-danger '>删除</button>"+
+            "<button type='submit' class='btn btn-danger ' style='margin-top:15px;margin-right: 15px;'>删除</button>"+
             "</form>"+
             "<form action= 'historyAction'  enctype='multipart/form-data' method='post'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
             "<input type='text' style ='display:none' name='path' value='"+fpathList_coop[i]+"'>"+
-            "<button type='submit' class='btn btn-success '>历史</button>"+
+            "<button type='submit' class='btn btn-success ' style='margin-top:15px;margin-right: 15px;'>历史</button>"+
             "</form>"+
             "</div>"
     }
