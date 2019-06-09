@@ -1,26 +1,67 @@
 package File;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.opensymphony.xwork2.ActionSupport;
 import dao.Dao;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
+import java.lang.reflect.Type;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Map;
+import java.util.Scanner;
 
+import static File.HistoryAction.randomColor;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 
 public class EditAction extends ActionSupport {
-    String username;
-    String docName;
-    String path;
-    String oldPath;
-    String newPath;
-    String content;
-    String docOwner;
-    String docID;
-    String docSharer;
+    private String username;
+    private String docName;
+    private String path;
+    private String oldPath;
+    private String newPath;
+    private String content;
+    private String docOwner;
+    private String docID;
+    private String docSharer;
+    private String logpath;
+    private Map<String, String> versionLog;
+    private String[] color;
 
+    public void setLogpath(String logpath) {
+        this.logpath = logpath;
+    }
+
+    public void setDocID(String docID) {
+        this.docID = docID;
+    }
+
+    public void setVersionLog(Map<String, String> versionLog) {
+        this.versionLog = versionLog;
+    }
+
+    public void setColor(String[] color) {
+        this.color = color;
+    }
+
+    public String getLogpath() {
+        return logpath;
+    }
+
+    public String getDocID() {
+        return docID;
+    }
+
+    public String[] getColor() {
+        return color;
+    }
+
+    public Map<String, String> getVersionLog() {
+        return versionLog;
+    }
 
     public String getDocName() { return this.docName; }
 
@@ -82,8 +123,7 @@ public class EditAction extends ActionSupport {
         this.username = username;
     }
 
-    public String execute()
-    {
+    public String execute() throws FileNotFoundException {
         try{
             Dao dao = new Dao();
             Connection conn = dao.getConnection();
@@ -145,9 +185,20 @@ public class EditAction extends ActionSupport {
             e.printStackTrace();
         }
 
-
-
-
+        //版本日志读出
+        Gson gson = new Gson();
+        this.logpath = HistoryAction.getLogPath(this.oldPath, true);
+        File versionLogFile = new File(logpath);
+        if (versionLogFile.exists()) {
+            String content = new Scanner(versionLogFile).useDelimiter("\\Z").next();
+            Type type = new TypeToken<Map<String, String>>() {
+            }.getType();
+            this.versionLog = gson.fromJson(content, type);
+        }
+        this.color = new String[versionLog.size()];
+        for (int i = 0; i < versionLog.size(); i++) {
+            this.color[i] = HistoryAction.randomColor();
+        }
         return SUCCESS;
     }
 

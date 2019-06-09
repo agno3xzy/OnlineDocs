@@ -14,7 +14,7 @@ public class FileOperation {
     private Map<String,Integer> user_index;//这一次更新文档应传递的操作序列开始位置
     private File newFile;
     private File oldFile;
-    private List<String[]> optable;//操作序列表格（插入/删除，行数，开始位置，内容/字符数，是否插入新行/删除旧行，用户名）
+    private List<String[]> optable;//操作序列表格（插入/删除，行数，开始位置，是否插入新行/删除旧行，用户名,时间戳）
 
     public FileOperation(String oldFilePath,String newFilePath,int index_log,Map<String,Integer> user_index,List<String[]> optable){
         this.index_log=index_log;

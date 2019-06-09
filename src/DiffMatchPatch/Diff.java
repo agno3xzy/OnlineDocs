@@ -124,7 +124,7 @@ public class Diff {
         }.getType();
 
         if (editLogFile.exists()) {
-            String content = new Scanner(editLogFile).useDelimiter("/Z").next();
+            String content = new Scanner(editLogFile).useDelimiter("\\Z").next();
 
             editLog2 = gson.fromJson(content, type);
         }
@@ -169,4 +169,6 @@ public class Diff {
             return StringUtils.join(path, "/");
         }
     }
+
+
 }

@@ -15,7 +15,7 @@ public class ConflictHandle extends ActionSupport {
     private String newPath;
     private String username;
     private String operation;
-    private List<FileOperation> FopList=new ArrayList<>();
+    static List<FileOperation> FopList=new ArrayList<>();
     private FileOperation Fop;
 
     //根据历史数据修正行数和行内开始位置

@@ -1,6 +1,6 @@
 function saveFile() {
-    var xhr = new XMLHttpRequest();
-    var urlString = "FileSaveAction.action?";
+  /*  var xhr = new XMLHttpRequest();
+    var urlString = "fileSaveAction.action?";
     var args="username=" + document.getElementById("username").innerHTML
         + "&newPath="+document.getElementById("newpath").innerHTML
         + "&oldPath="+document.getElementById("oldpath").innerHTML;
@@ -23,5 +23,10 @@ function saveFile() {
                 },1000)
             }
         }
-    };
+    };*/
+
+    document.getElementById("save_success").style.visibility = "visible";
+    window.setTimeout(function(){
+        document.getElementById("save_success").style.visibility = "hidden";
+    },1000)
 }
