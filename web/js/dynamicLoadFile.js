@@ -10,6 +10,11 @@ function dynamic(){
         num_create=fnameList_create.length;
     for (var i=0;i<num_create;i++)
     {
+        var oldPath=path+"\\create\\"+fnameList_create[i];
+        var string_t=fnameList_create[i].split("\\.");
+        var newPath=path+"\\create\\"+string_t[0]+"_t."+string_t[1];
+        console.log(oldPath);
+        console.log(newPath);
         document.getElementById("creat_list").innerHTML+=
             "<div class='row create_item' style='padding-right:20px'>"+
             "<div class='col text-left' style='margin-top:20px;'>"+
@@ -17,7 +22,8 @@ function dynamic(){
             "</div>"+
             "<form action= 'editAction'  enctype='multipart/form-data' method='post'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-            "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
+            "<input type='text' style ='display:none' name='oldPath' value='"+oldPath+"'>"+
+            "<input type='text' style ='display:none' name='newPath' value='"+newPath+"'>"+
             "<button type='submit' class='btn btn-primary ' style='margin-top:15px;margin-right: 15px;'>编辑</button>"+
             "</form>"+
             "<form action= 'downloadAction'  enctype='multipart/form-data' method='post'>"+
@@ -27,7 +33,8 @@ function dynamic(){
             "</form>"+
             "<form action= 'deleteAction'  enctype='multipart/form-data' method='post'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-            "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
+            "<input type='text' style ='display:none' name='oldPath' value='"+oldPath+"'>"+
+            "<input type='text' style ='display:none' name='newPath' value='"+newPath+"'>"+
             "<button type='submit' class='btn btn-danger ' style='margin-top:15px;margin-right: 15px;'>删除</button>"+
             "</form>"+
             "<form action= 'historyAction'  enctype='multipart/form-data' method='post'>"+
@@ -49,6 +56,14 @@ function dynamic(){
         num_coop=fnameList_coop.length;
     for (var i=0;i<num_coop;i++)
     {
+        var oldPath = fpathList_coop[i];
+        var string_t=oldPath.split("/");
+        var string_tt=string_t[string_t.length-1].split("\\.");
+        string_tt[0]+="_t";
+        string_t[string_t.length-1]=string_tt.join(".");
+        var newPath = string_t.join("\\");
+        console.log(oldPath);
+        console.log(newPath);
         document.getElementById("coop_list").innerHTML+=
             "<div class='row create_item' style='padding-right:20px'>"+
             "<div class='col text-left' style='margin-top:20px;'>"+
@@ -56,7 +71,8 @@ function dynamic(){
             "</div>"+
             "<form action= 'editAction'  enctype='multipart/form-data' method='post'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-            "<input type='text' style ='display:none' name='path' value='"+fpathList_coop[i]+"'>"+
+            "<input type='text' style ='display:none' name='oldPath' value='"+oldPath+"'>"+
+            "<input type='text' style ='display:none' name='newPath' value='"+newPath+"'>"+
             "<button type='submit' class='btn btn-primary ' style='margin-top:15px;margin-right: 15px;'>编辑</button>"+
             "</form>"+
             "<form action= 'downloadAction'  enctype='multipart/form-data' method='post'>"+
@@ -66,7 +82,8 @@ function dynamic(){
             "</form>"+
             "<form action= 'deleteAction'  enctype='multipart/form-data' method='post'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-            "<input type='text' style ='display:none' name='path' value='"+fpathList_coop[i]+"'>"+
+            "<input type='text' style ='display:none' name='oldPath' value='"+oldPath+"'>"+
+            "<input type='text' style ='display:none' name='newPath' value='"+newPath+"'>"+
             "<button type='submit' class='btn btn-danger ' style='margin-top:15px;margin-right: 15px;'>删除</button>"+
             "</form>"+
             "<form action= 'historyAction'  enctype='multipart/form-data' method='post'>"+

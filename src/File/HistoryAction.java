@@ -36,17 +36,17 @@ public class HistoryAction  {
     }
 
     public static String getLogPath(String filePath, boolean type) {
-        String[] path = filePath.split("/");
+        String[] path = filePath.split("\\\\");
         path[path.length - 2] = "log";
         String filename = path[path.length - 1].split("\\.")[0];
         if (type == true) {
             String versionLogName = filename + "_version.json";
             path[path.length - 1] = versionLogName;
-            return StringUtils.join(path, "/");
+            return StringUtils.join(path, "\\");
         } else {
             String editLogName = filename + "_edit.json";
             path[path.length - 1] = editLogName;
-            return StringUtils.join(path, "/");
+            return StringUtils.join(path, "\\");
         }
     }
 

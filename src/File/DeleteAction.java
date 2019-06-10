@@ -12,19 +12,54 @@ import java.util.Locale;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 
 public class DeleteAction {
-    private String path;
+    private String oldPath;
+    private String newPath;
     private String username;
 
+
+
+    public String getOldPath()
+    {
+        return this.oldPath;
+    }
+
+    public void setOldPath(String oldPath)
+    {
+        this.oldPath = oldPath;
+    }
+
+    public String getNewPath()
+    {
+        return this.newPath;
+    }
+
+    public void setNewPath(String newPath)
+    {
+        this.newPath = newPath;
+    }
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+
     public String execute(){
-        File file = new File(path);//这里有很多处理手段满足不同需求(从数据库读取等)
-        file.delete();
+        File oldFile = new File(oldPath);
+        File newFile = new File(newPath);
+        oldFile.delete();
+        newFile.delete();
         try
         {
             Dao dao = new Dao();
             Connection conn = dao.getConnection();
 
             PreparedStatement p2 = conn.prepareStatement("select * from document " +
-                    "where text_path='"+path.replace("\\","/")+"'");
+                    "where text_path='"+oldPath.replace("\\","/")+"'");
             ResultSet rs2 = p2.executeQuery();
             rs2.next();
             String id=rs2.getString("iddocument");
@@ -49,19 +84,4 @@ public class DeleteAction {
         return SUCCESS;
     }
 
-    public String getPath(){
-        return path;
-    }
-
-    public void setPath(String path){
-        this.path=path;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 }

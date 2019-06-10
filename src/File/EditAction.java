@@ -20,7 +20,6 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 public class EditAction extends ActionSupport {
     private String username;
     private String docName;
-    private String path;
     private String oldPath;
     private String newPath;
     private String content;
@@ -95,16 +94,6 @@ public class EditAction extends ActionSupport {
         this.newPath = newPath;
     }
 
-    public String getPath()
-    {
-        return this.path;
-    }
-
-    public void setPath(String path)
-    {
-        this.path = path;
-    }
-
     public String getContent()
     {
         return this.content;
@@ -129,7 +118,7 @@ public class EditAction extends ActionSupport {
             Connection conn = dao.getConnection();
 
             PreparedStatement p1 = conn.prepareStatement("select * from document where text_path='"
-                    +path.replace("\\","/")+"'");
+                    +oldPath.replace("\\","/")+"'");
             ResultSet rs1 = p1.executeQuery();
             rs1.next();
             docID = rs1.getString("iddocument");
@@ -154,19 +143,12 @@ public class EditAction extends ActionSupport {
             dao.close(rs3,p3);
 
             PreparedStatement p4 = conn.prepareStatement("select * from document where text_path='"
-                    + path.replace("\\","/") + "'");
+                    + oldPath.replace("\\","/") + "'");
             ResultSet rs4 = p4.executeQuery();
             rs4.next();
             docName = rs4.getString("document_name");
             dao.close(rs4,p4);
             dao.close(conn);
-
-            oldPath = path;
-            String[] string_t=oldPath.split("\\\\");
-            String[] string_tt=string_t[string_t.length-1].split("\\.");
-            string_tt[0]+="_t";
-            string_t[string_t.length-1]=String.join(".",string_tt);
-            newPath = String.join("\\",string_t);
 
             File file = new File(newPath);
             FileReader fr = new FileReader(file);  //字符输入流
