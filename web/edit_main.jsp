@@ -97,8 +97,8 @@
                                 </p>
                                 <input type='text' style='display:none' name='timestamp'
                                        value='<s:property value="key"/>'>
-                                <input type='text' style='display:none' name='logpath'
-                                       value='<s:property value="path"/>'>
+                                <input hidden="hidden" name="username" value="<s:property value="username"/>">
+                                <input hidden="hidden" name="path" value="<s:property value="oldPath"/>">
                                 <input type='submit' value='revert'>
                             </button>
                         </form>
@@ -159,7 +159,7 @@
             <input hidden="hidden" name="newpath" value="<s:property value="newPath"/>">
             <input hidden="hidden" name="username" value="<s:property value="username"/>">
             <input hidden="hidden" name="path" value="<s:property value="oldPath"/>">
-            <input type="submit" class="btn btn-primary" onclick="saveFile()" value="保存文件"/>
+            <input type="submit" class="btn btn-primary" value="保存文件"/>
         </form>
     </div>
 
