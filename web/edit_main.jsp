@@ -96,14 +96,14 @@
                     <form action="ShareAction" enctype='multipart/form-data' method='post'>
                         <input hidden="hidden" name="docName" value=<%=docName%>>
                         <input hidden="hidden" name="path" value=<%=oldpath%>>
-                        <input hidden="hidden" name="authority" value="查看">
+                        <input hidden="hidden" name="authority" value="read">
                         <button type="submit">分享查看权限</button>
                     </form>
 
                         <form action="ShareAction" enctype='multipart/form-data' method='post'>
                             <input hidden="hidden" name="docName" value=<%=docName%>>
                             <input hidden="hidden" name="path" value=<%=oldpath%>>
-                            <input hidden="hidden" name="authority" value="编辑">
+                            <input hidden="hidden" name="authority" value="share">
                             <button type="submit">分享编辑权限</button>
                         </form>
                     </div>

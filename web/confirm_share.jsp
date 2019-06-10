@@ -42,21 +42,28 @@
 
 <head>
     <title>Title</title>
+    <script src="js/dynamicLoadFile.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
 </head>
 <body>
 
 
-
-<p>确认界面</p>
-<p><%=username%>用户你好</p>
-<p><%=docName%></p>
-<p><%=docID%></p>
-<p>获得的权限为<%=authority%></p>
+<div class="alert alert-info">
+    <p>确认界面</p>
+    <p style="margin-top:15px;"><span><strong><%=username%></strong></span>用户你好</p>
+    <p style="margin-top:15px;"><span><strong><%=docName%></strong></span></p>
+    <p style="margin-top:15px;">文档:<span><strong><%=docID%></strong></span></p>
+    <p style="margin-top:15px;">获得的权限为<span><strong><%=authority%></strong></span></p>
+</div>
 <form action="ConfirmAction" enctype='multipart/form-data' method='post'>
     <input hidden="hidden" name="userID" value=<%=userID%>>
     <input hidden="hidden" name="docID" value=<%=docID%>>
     <input hidden="hidden" name="authority" value=<%=authority%>>
-    <button type="submit">确认</button>
+    <button type="submit" class="btn btn-default" style="margin-left:20px;">确认</button>
 </form>
 </body>
 </html>
