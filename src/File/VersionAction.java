@@ -39,7 +39,7 @@ public class VersionAction {
         return StringUtils.join(path, "/");
     }
 
-    public String excute() throws IOException {
+    public String execute() throws IOException {
         String filePath = getFilePath(this.logpath);
         File file = new File(filePath);
         FileReader fr = new FileReader(file);
@@ -67,7 +67,8 @@ public class VersionAction {
 
         int node = Arrays.binarySearch(keys, this.timestamp);
 
-        for (int i = keys.length - 1; i > node; i--) {
+        str = sb.toString();
+        for (int i = keys.length - 1; i >= node; i--) {
             diff_match_patch dmp = new diff_match_patch();
             String strPatches = versionLog.get(keys[i]);
             LinkedList<diff_match_patch.Patch> patches = (LinkedList<diff_match_patch.Patch>) dmp.patch_fromText(strPatches);
@@ -75,6 +76,7 @@ public class VersionAction {
             tmp = dmp.patch_apply(patches, str);
             str = (String) (tmp[0]);
         }
+
 
         try (PrintWriter out = new PrintWriter(filePath)) {
             out.println(str);

@@ -12,7 +12,7 @@ import java.util.*;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 
-public class HistoryAction extends ActionSupport {
+public class HistoryAction  {
     private  Map<String, String> versionLog;
     private String username;
     private String[] color;
@@ -38,9 +38,7 @@ public class HistoryAction extends ActionSupport {
     public static String getLogPath(String filePath, boolean type) {
         String[] path = filePath.split("/");
         path[path.length - 2] = "log";
-        String[] test = path[path.length - 1].split("\\.");
         String filename = path[path.length - 1].split("\\.")[0];
-
         if (type == true) {
             String versionLogName = filename + "_version.json";
             path[path.length - 1] = versionLogName;
@@ -52,7 +50,7 @@ public class HistoryAction extends ActionSupport {
         }
     }
 
-    public String randomColor(){
+    public static String randomColor(){
         String red;
         //绿色
         String green;
@@ -79,7 +77,6 @@ public class HistoryAction extends ActionSupport {
     public String execute() throws FileNotFoundException {
         Gson gson = new Gson();
         this.path = getLogPath(path, true);
-        System.out.println(this.path);
         File versionLogFile = new File(path);
         if (versionLogFile.exists()) {
             String content = new Scanner(versionLogFile).useDelimiter("\\Z").next();

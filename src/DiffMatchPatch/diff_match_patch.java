@@ -2223,7 +2223,7 @@ public class diff_match_patch {
         LinkedList<String> text = new LinkedList<String>(textList);
         Patch patch;
         Pattern patchHeader
-                = Pattern.compile("^@@ -(\\d+),?(\\d*) \\+(\\d+),?(\\d*) @@$");
+                = Pattern.compile("^^@@ -(\\d+),?(\\d*) \\+(\\d+),?(\\d*) @@$");
         Matcher m;
         char sign;
         String line;
