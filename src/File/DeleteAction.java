@@ -53,6 +53,11 @@ public class DeleteAction {
         File newFile = new File(newPath);
         oldFile.delete();
         newFile.delete();
+
+        String logPath = VersionAction.findLogPath(oldPath);
+        File logFile = new File(logPath);
+        logFile.delete();
+
         try
         {
             Dao dao = new Dao();
