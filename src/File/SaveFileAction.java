@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sun.net.httpserver.Authenticator;
 import dao.Dao;
+import org.apache.commons.io.FileUtils;
 
 import java.io.*;
 import java.io.FileWriter;
@@ -141,11 +142,17 @@ public class SaveFileAction {
         this.oldpath = oldpath;
     }
 
+
     public String execute() throws IOException {
 
         if (this.oldpath != null && this.newpath != null) {
             Diff.saveVersionLog(this.oldpath, this.newpath);
         }
+
+        File oldFile = new File(this.oldpath);
+        File newFile = new File(this.newpath);
+
+        FileUtils.copyFile(newFile, oldFile);
 
         try{
             Dao dao = new Dao();
@@ -185,11 +192,7 @@ public class SaveFileAction {
             dao.close(conn);
 
             oldPath = path;
-            String[] string_t=oldPath.split("\\\\");
-            String[] string_tt=string_t[string_t.length-1].split("\\.");
-            string_tt[0]+="_t";
-            string_t[string_t.length-1]=String.join(".",string_tt);
-            newPath = String.join("\\",string_t);
+            newPath = this.newpath;
 
             File file = new File(newPath);
             FileReader fr = new FileReader(file);  //字符输入流
