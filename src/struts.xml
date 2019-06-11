@@ -60,5 +60,8 @@
         <action name="versionAction" class="File.VersionAction" >
             <result>/edit_main.jsp</result>
         </action>
+        <action name="ShareAction" class="Share.ShareAction" >
+            <result>/share.jsp</result>
+        </action>
     </package>
 </struts>

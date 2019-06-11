@@ -21,13 +21,8 @@ import java.util.Scanner;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 
 public class SaveFileAction {
-
-    private String newpath;
-    private String oldpath;
     private String username;
-
     private String docName;
-    private String path;
     private String oldPath;
     private String newPath;
     private String content;
@@ -102,16 +97,6 @@ public class SaveFileAction {
         this.newPath = newPath;
     }
 
-    public String getPath()
-    {
-        return this.path;
-    }
-
-    public void setPath(String path)
-    {
-        this.path = path;
-    }
-
     public String getContent()
     {
         return this.content;
@@ -126,31 +111,15 @@ public class SaveFileAction {
 
     public void setUsername(String username) {this.username = username;}
 
-    public String getNewpath() {
-        return newpath;
-    }
-
-    public String getOldpath() {
-        return oldpath;
-    }
-
-    public void setNewpath(String newpath) {
-        this.newpath = newpath;
-    }
-
-    public void setOldpath(String oldpath) {
-        this.oldpath = oldpath;
-    }
-
 
     public String execute() throws IOException {
 
-        if (this.oldpath != null && this.newpath != null) {
-            Diff.saveVersionLog(this.oldpath, this.newpath);
+        if (oldPath != null && newPath != null) {
+            Diff.saveVersionLog(oldPath, newPath);
         }
 
-        File oldFile = new File(this.oldpath);
-        File newFile = new File(this.newpath);
+        File oldFile = new File(oldPath);
+        File newFile = new File(newPath);
 
         FileUtils.copyFile(newFile, oldFile);
 
@@ -159,7 +128,7 @@ public class SaveFileAction {
             Connection conn = dao.getConnection();
 
             PreparedStatement p1 = conn.prepareStatement("select * from document where text_path='"
-                    +path.replace("\\","/")+"'");
+                    +oldPath.replace("\\","/")+"'");
             ResultSet rs1 = p1.executeQuery();
             rs1.next();
             docID = rs1.getString("iddocument");
@@ -184,15 +153,12 @@ public class SaveFileAction {
             dao.close(rs3,p3);
 
             PreparedStatement p4 = conn.prepareStatement("select * from document where text_path='"
-                    + path.replace("\\","/") + "'");
+                    + oldPath.replace("\\","/") + "'");
             ResultSet rs4 = p4.executeQuery();
             rs4.next();
             docName = rs4.getString("document_name");
             dao.close(rs4,p4);
             dao.close(conn);
-
-            oldPath = path;
-            newPath = this.newpath;
 
             File file = new File(newPath);
             FileReader fr = new FileReader(file);  //字符输入流
@@ -213,17 +179,17 @@ public class SaveFileAction {
 
         //版本日志读出
         Gson gson = new Gson();
-        this.logpath = HistoryAction.getLogPath(this.oldPath, true);
+        logpath = HistoryAction.getLogPath(oldPath, true);
         File versionLogFile = new File(logpath);
         if (versionLogFile.exists()) {
             String content = new Scanner(versionLogFile).useDelimiter("\\Z").next();
             Type type = new TypeToken<Map<String, String>>() {
             }.getType();
-            this.versionLog = gson.fromJson(content, type);
+            versionLog = gson.fromJson(content, type);
         }
-        this.color = new String[versionLog.size()];
+        color = new String[versionLog.size()];
         for (int i = 0; i < versionLog.size(); i++) {
-            this.color[i] = HistoryAction.randomColor();
+            color[i] = HistoryAction.randomColor();
         }
 
         return SUCCESS;

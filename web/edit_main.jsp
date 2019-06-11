@@ -98,7 +98,8 @@
                                 <input type='text' style='display:none' name='timestamp'
                                        value='<s:property value="key"/>'>
                                 <input hidden="hidden" name="username" value="<s:property value="username"/>">
-                                <input hidden="hidden" name="path" value="<s:property value="oldPath"/>">
+                                <input hidden="hidden" name="oldPath" value="<s:property value="oldPath"/>">
+                                <input hidden="hidden" name="newPath" value="<s:property value="newPath"/>">
                                 <input type='submit' value='revert'>
                             </button>
                         </form>
@@ -155,10 +156,9 @@
 
     <div style="text-align: center;margin-top: 150px">
         <form action="fileSaveAction" enctype='multipart/form-data' method='post'>
-            <input hidden="hidden" name="oldpath" value="<s:property value="oldPath"/>">
-            <input hidden="hidden" name="newpath" value="<s:property value="newPath"/>">
+            <input hidden="hidden" name="oldPath" value="<s:property value="oldPath"/>">
+            <input hidden="hidden" name="newPath" value="<s:property value="newPath"/>">
             <input hidden="hidden" name="username" value="<s:property value="username"/>">
-            <input hidden="hidden" name="path" value="<s:property value="oldPath"/>">
             <input type="submit" class="btn btn-primary" value="保存文件"/>
         </form>
     </div>
@@ -180,7 +180,7 @@
 
 
     <script type="text/javascript">
-        setInterval(timeUpdate, 5000);
+        setInterval(timeUpdate, 100);
 
         var quill = new Quill('#editor-container', {
             modules: {

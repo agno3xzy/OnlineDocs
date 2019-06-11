@@ -162,40 +162,28 @@ public class EditAction extends ActionSupport {
             }
             br.close();    //关闭输入流
             content=strB.toString();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
 
         //版本日志读出
         Gson gson = new Gson();
-        this.logpath = HistoryAction.getLogPath(this.oldPath, true);
-
-
-
+        logpath = HistoryAction.getLogPath(oldPath, true);
 
         String sourceString = "{}";	//待写入字符串
         byte[] sourceByte = sourceString.getBytes();
         if(null != sourceByte){
-            try {
-                File versionLogFile = new File(logpath);
-                if (!versionLogFile.exists()) {	//文件不存在则创建文件，先创建目录
-                    File dir = new File(versionLogFile.getParent());
-                    dir.mkdirs();
-                    versionLogFile.createNewFile();
-                    FileOutputStream outStream = new FileOutputStream(versionLogFile);	//文件输出流用于将数据写入文件
-                    outStream.write(sourceByte);
-                    outStream.close();	//关闭文件输出流
-                }
-               else{
-                    String content = new Scanner(versionLogFile).useDelimiter("\\Z").next();
-                    Type type = new TypeToken<Map<String, String>>() {
-                    }.getType();
-                    this.versionLog = gson.fromJson(content, type);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            File versionLogFile = new File(logpath);
+            if (!versionLogFile.exists()) {	//文件不存在则创建文件，先创建目录
+                File dir = new File(versionLogFile.getParent());
+                dir.mkdirs();
+                versionLogFile.createNewFile();
+                FileOutputStream outStream = new FileOutputStream(versionLogFile);	//文件输出流用于将数据写入文件
+                outStream.write(sourceByte);
+                outStream.close();	//关闭文件输出流
+            }
+           else{
+                String content = new Scanner(versionLogFile).useDelimiter("\\Z").next();
+                Type type = new TypeToken<Map<String, String>>() {
+                }.getType();
+                versionLog = gson.fromJson(content, type);
             }
         }
 
@@ -209,6 +197,11 @@ public class EditAction extends ActionSupport {
             }
         }
 
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         return SUCCESS;
     }
 

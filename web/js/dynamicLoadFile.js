@@ -11,7 +11,7 @@ function dynamic(){
     for (var i=0;i<num_create;i++)
     {
         var oldPath=path+"\\create\\"+fnameList_create[i];
-        var string_t=fnameList_create[i].split("\\.");
+        var string_t=fnameList_create[i].split(".");
         var newPath=path+"\\create\\"+string_t[0]+"_t."+string_t[1];
         console.log(oldPath);
         console.log(newPath);
@@ -28,7 +28,7 @@ function dynamic(){
             "</form>"+
             "<form action= 'downloadAction'  enctype='multipart/form-data' method='post'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-            "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
+            "<input type='text' style ='display:none' name='path' value='"+oldPath+"'>"+
             "<button type='submit' class='btn btn-success ' style='margin-top:15px;margin-right: 15px;'>下载</button>"+
             "</form>"+
             "<form action= 'deleteAction'  enctype='multipart/form-data' method='post'>"+
@@ -39,7 +39,7 @@ function dynamic(){
             "</form>"+
             "<form action= 'historyAction'  enctype='multipart/form-data' method='post'>"+
             "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-            "<input type='text' style ='display:none' name='path' value='"+path+"\\create\\"+fnameList_create[i]+"'>"+
+            "<input type='text' style ='display:none' name='path' value='"+oldPath+"'>"+
             "<button type='submit' class='btn btn-success ' style='margin-top:15px;margin-right: 15px;'>历史</button>"+
             "</form>"+
             "</div>"
@@ -58,7 +58,7 @@ function dynamic(){
     {
         var oldPath = fpathList_coop[i];
         var string_t=oldPath.split("/");
-        var string_tt=string_t[string_t.length-1].split("\\.");
+        var string_tt=string_t[string_t.length-1].split(".");
         string_tt[0]+="_t";
         string_t[string_t.length-1]=string_tt.join(".");
         var newPath = string_t.join("\\");
