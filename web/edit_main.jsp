@@ -159,7 +159,6 @@
             <input hidden="hidden" name="oldPath" value="<s:property value="oldPath"/>">
             <input hidden="hidden" name="newPath" value="<s:property value="newPath"/>">
             <input hidden="hidden" name="username" value="<s:property value="username"/>">
-            <input hidden="hidden" name="path" value="<s:property value="oldPath"/>">
             <input type="submit" class="btn btn-primary" value="保存文件"/>
         </form>
     </div>

@@ -179,8 +179,8 @@ public class SaveFileAction {
 
         //版本日志读出
         Gson gson = new Gson();
-        logpath = HistoryAction.getLogPath(oldPath, true);
-        File versionLogFile = new File(logpath);
+        this.logpath = HistoryAction.getLogPath(oldPath, true);
+        File versionLogFile = new File(this.logpath);
         if (versionLogFile.exists()) {
             String content = new Scanner(versionLogFile).useDelimiter("\\Z").next();
             Type type = new TypeToken<Map<String, String>>() {

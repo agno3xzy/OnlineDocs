@@ -20,7 +20,6 @@ import static com.opensymphony.xwork2.Action.SUCCESS;
 public class VersionAction {
     private String username;
     private String docName;
-    private String path;
     private String oldPath;
     private String newPath;
     private String content;
@@ -89,16 +88,6 @@ public class VersionAction {
         this.newPath = newPath;
     }
 
-    public String getPath()
-    {
-        return this.path;
-    }
-
-    public void setPath(String path)
-    {
-        this.path = path;
-    }
-
     public String getContent()
     {
         return this.content;
@@ -141,8 +130,8 @@ public class VersionAction {
     }
 
     public String execute() throws IOException {
-        this.logpath = findLogPath(this.path);
-        File file = new File(this.path);
+        this.logpath = findLogPath(this.oldPath);
+        File file = new File(this.oldPath);
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
         StringBuilder sb = new StringBuilder();
@@ -178,7 +167,7 @@ public class VersionAction {
             str = (String) (tmp[0]);
         }
 
-        try (PrintWriter out = new PrintWriter(this.path)) {
+        try (PrintWriter out = new PrintWriter(this.oldPath)) {
             out.println(str);
         }
 
@@ -196,7 +185,7 @@ public class VersionAction {
             Connection conn = dao.getConnection();
 
             PreparedStatement p1 = conn.prepareStatement("select * from document where text_path='"
-                    +path.replace("\\","/")+"'");
+                    +this.oldPath.replace("\\","/")+"'");
             ResultSet rs1 = p1.executeQuery();
             rs1.next();
             docID = rs1.getString("iddocument");
@@ -221,14 +210,13 @@ public class VersionAction {
             dao.close(rs3,p3);
 
             PreparedStatement p4 = conn.prepareStatement("select * from document where text_path='"
-                    + path.replace("\\","/") + "'");
+                    + this.oldPath.replace("\\","/") + "'");
             ResultSet rs4 = p4.executeQuery();
             rs4.next();
             docName = rs4.getString("document_name");
             dao.close(rs4,p4);
             dao.close(conn);
 
-            oldPath = path;
             String[] string_t=oldPath.split("\\\\");
             String[] string_tt=string_t[string_t.length-1].split("\\.");
             string_tt[0]+="_t";
