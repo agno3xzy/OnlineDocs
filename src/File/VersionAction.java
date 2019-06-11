@@ -123,10 +123,10 @@ public class VersionAction {
     }
 
     public static String findLogPath(String filePath) {
-        String[] path = filePath.split("/");
+        String[] path = filePath.split("\\\\");
         path[path.length - 2] = "log";
         path[path.length - 1] = path[path.length - 1].replace( ".txt","_version.json");
-        return StringUtils.join(path, "/");
+        return StringUtils.join(path, "\\");
     }
 
     public String execute() throws IOException {
