@@ -180,7 +180,7 @@
 
 
     <script type="text/javascript">
-        setInterval(timeUpdate, 100);
+        setInterval(timeUpdate, 5000);
 
         var quill = new Quill('#editor-container', {
             modules: {

@@ -59,9 +59,6 @@
         <action name="fileSaveAction" class="File.SaveFileAction">
             <result>/edit_main.jsp</result>
         </action>
-        <action name="historyAction" class="File.HistoryAction" >
-            <result>/history.jsp</result>
-        </action>
         <action name="versionAction" class="File.VersionAction" >
             <result>/edit_main.jsp</result>
         </action>

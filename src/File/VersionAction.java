@@ -123,15 +123,15 @@ public class VersionAction {
     }
 
     public static String findLogPath(String filePath) {
-        String[] path = filePath.split("\\\\");
+        String[] path = filePath.split("/");
         path[path.length - 2] = "log";
         path[path.length - 1] = path[path.length - 1].replace( ".txt","_version.json");
-        return StringUtils.join(path, "\\");
+        return StringUtils.join(path, "/");
     }
 
     public String execute() throws IOException {
-        logpath = findLogPath(oldPath);
-        File file = new File(oldPath);
+        this.logpath = findLogPath(this.oldPath);
+        File file = new File(this.oldPath);
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
         StringBuilder sb = new StringBuilder();
@@ -145,7 +145,7 @@ public class VersionAction {
         fr.close();
         br.close();
 
-        File logFile = new File(logpath);
+        File logFile = new File(this.logpath);
         Map<String, String> versionLog = new HashMap<String, String>();
         Gson gson = new Gson();
         String logContent = new Scanner(logFile).useDelimiter("\\Z").next();
@@ -155,7 +155,7 @@ public class VersionAction {
         Object[] keys = versionLog.keySet().toArray();
         Arrays.sort(keys);
 
-        int node = Arrays.binarySearch(keys, timestamp);
+        int node = Arrays.binarySearch(keys, this.timestamp);
 
         str = sb.toString();
         for (int i = keys.length - 1; i >= node; i--) {
@@ -167,8 +167,7 @@ public class VersionAction {
             str = (String) (tmp[0]);
         }
 
-
-        try (PrintWriter out = new PrintWriter(oldPath)) {
+        try (PrintWriter out = new PrintWriter(this.oldPath)) {
             out.println(str);
         }
 
@@ -176,7 +175,7 @@ public class VersionAction {
             versionLog.remove(keys[i]);
         }
 
-        try (PrintWriter out = new PrintWriter(logpath)) {
+        try (PrintWriter out = new PrintWriter(this.logpath)) {
             out.println(gson.toJson(versionLog));
         }
 
@@ -186,7 +185,7 @@ public class VersionAction {
             Connection conn = dao.getConnection();
 
             PreparedStatement p1 = conn.prepareStatement("select * from document where text_path='"
-                    +oldPath.replace("\\","/")+"'");
+                    +this.oldPath.replace("\\","/")+"'");
             ResultSet rs1 = p1.executeQuery();
             rs1.next();
             docID = rs1.getString("iddocument");
@@ -211,12 +210,18 @@ public class VersionAction {
             dao.close(rs3,p3);
 
             PreparedStatement p4 = conn.prepareStatement("select * from document where text_path='"
-                    + oldPath.replace("\\","/") + "'");
+                    + this.oldPath.replace("\\","/") + "'");
             ResultSet rs4 = p4.executeQuery();
             rs4.next();
             docName = rs4.getString("document_name");
             dao.close(rs4,p4);
             dao.close(conn);
+
+            String[] string_t=oldPath.split("\\\\");
+            String[] string_tt=string_t[string_t.length-1].split("\\.");
+            string_tt[0]+="_t";
+            string_t[string_t.length-1]=String.join(".",string_tt);
+            newPath = String.join("\\",string_t);
 
             File newfile = new File(newPath);
             File oldfile = new File(oldPath);
@@ -225,7 +230,7 @@ public class VersionAction {
             BufferedReader nbr = new BufferedReader(nfr);  //使文件可按行读取并具有缓冲功能
             StringBuffer strB = new StringBuffer();   //strB用来存储jsp.txt文件里的内容
             String nstr = nbr.readLine();
-            while (str != null) {
+            while (nstr != null) {
                 strB.append(nstr+"\n");   //将读取的内容放入strB
                 nstr = nbr.readLine();
             }
@@ -237,12 +242,12 @@ public class VersionAction {
             e.printStackTrace();
         }
 
-        color = new String[1];
+        this.color = new String[1];
 
-        if(versionLog != null){
-            color = new String[versionLog.size()];
+        if(this.versionLog != null){
+            this.color = new String[versionLog.size()];
             for (int i = 0; i < versionLog.size(); i++) {
-                color[i] = HistoryAction.randomColor();
+                this.color[i] = HistoryAction.randomColor();
             }
         }
 
