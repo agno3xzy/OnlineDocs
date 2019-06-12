@@ -9,11 +9,6 @@
         <action name="Signin" class="Registration.SigninAction">
             <result name="success">/document_manage.jsp</result>
         </action>
-        <action name="ConfirmAction" class="Share.ConfirmAction">
-            <result name="success">/confirm_share_success.jsp</result>
-            <result name="alreadyHasRead">/confirm_share_fail_read.jsp</result>
-            <result name="alreadyHasShare">/confirm_share_fail_share.jsp</result>
-        </action>
 
         <action name="ConfirmShareSigninAction" class="Registration.ConfirmShareSigninAction">
             <result name="success">/confirm_share.jsp</result>
@@ -59,11 +54,20 @@
         <action name="fileSaveAction" class="File.SaveFileAction">
             <result>/edit_main.jsp</result>
         </action>
+
         <action name="versionAction" class="File.VersionAction" >
             <result>/edit_main.jsp</result>
         </action>
+
         <action name="ShareAction" class="Share.ShareAction" >
             <result>/share.jsp</result>
         </action>
+
+        <action name="ConfirmAction" class="Share.ConfirmAction">
+            <result name="success">/document_manage.jsp</result>
+            <result name="alreadyHasRead">/confirm_share.jsp</result>
+            <result name="alreadyHasShare">/confirm_share.jsp</result>
+        </action>
+
     </package>
 </struts>

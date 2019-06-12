@@ -17,8 +17,6 @@
     <script type="text/javascript" src="/js/bootstrap.js"></script>
 </head>
 <body>
-<div class="alert alert-danger" align="center" style="padding-top:20px;font-size:15px;">
-    <span><strong>确认失败！你已经有该文档的分享权限。</strong></span>
-</div>
+
 </body>
 </html>

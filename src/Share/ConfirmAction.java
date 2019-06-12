@@ -12,6 +12,12 @@ public class ConfirmAction {
     private String userID;
     private String docID;
     private String authority;
+    private String username;
+    private String wrongMessage;
+
+    public String getUsername(){return username;}
+
+    public void setUsername(String username){this.username = username;}
 
     public String getUserID(){return this.userID;}
 
@@ -25,6 +31,9 @@ public class ConfirmAction {
 
     public void setAuthority(String authority){this.authority=authority;}
 
+    public String getWrongMessage(){return this.wrongMessage;}
+
+    public void setWrongMessage(String wrongMessage){this.wrongMessage = wrongMessage;}
 
     public String execute()
     {
@@ -50,10 +59,12 @@ public class ConfirmAction {
                     curPermission = rs3.getString("permission");
                     if(curPermission.equals("read"))
                     {
+                        wrongMessage = "read";
                         return "alreadyHasRead";
                     }
                     else
                     {
+                        wrongMessage = "share";
                         return "alreadyHasShare";
                     }
                 }
@@ -90,6 +101,7 @@ public class ConfirmAction {
 
                     else
                     {
+                        wrongMessage = "share";
                         return "alreadyHasShare";
                     }
 

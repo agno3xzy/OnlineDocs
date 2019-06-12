@@ -49,7 +49,7 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
     <script type="text/javascript" src="/js/bootstrap.js"></script>
 </head>
-<body>
+<body onload="setMessage()">
 
 
 <div class="alert alert-info">
@@ -59,11 +59,53 @@
     <p style="margin-top:15px;">文档:<span><strong><%=docID%></strong></span></p>
     <p style="margin-top:15px;">获得的权限为<span><strong><%=authority%></strong></span></p>
 </div>
+
+<label id="wrongMessage" hidden="hidden"><s:property value="wrongMessage"/></label>
+
 <form action="ConfirmAction" enctype='multipart/form-data' method='post'>
     <input hidden="hidden" name="userID" value=<%=userID%>>
     <input hidden="hidden" name="docID" value=<%=docID%>>
     <input hidden="hidden" name="authority" value=<%=authority%>>
+    <input hidden="hidden" name="username" value=<%=username%>>
     <button type="submit" class="btn btn-default" style="margin-left:20px;">确认</button>
 </form>
+
+<div id="fail_share" class="alert alert-danger" align="center" style="padding-top:20px;font-size:15px;display: none;">
+    <span><strong>确认失败！你已经有该文档的分享权限。</strong></span>
+</div>
+
+<div id="fail_read" class="alert alert-danger" align="center" style="padding-top:20px;font-size:15px;display: none;">
+    <span><strong>确认失败！你已经有该文档的读取权限。</strong></span>
+</div>
+<form id="fail_jump" action="Signin" enctype='multipart/form-data' method='post' style="display: none;">
+    <input hidden="hidden" name="username" value=<%=username%>>
+    <button type="submit" class="btn btn-default" style="margin-left:20px;">确认</button>
+</form>
+<script>
+    function setMessage(){
+        var wrongMessage = document.getElementById("wrongMessage").innerHTML;
+        if(wrongMessage == "share")
+        {
+            console.log("111");
+            var a = document.getElementById("fail_share");
+            var b = document.getElementById("fail_jump");
+            a.style.display="block";
+            b.style.display="block";
+
+        }
+        else if(wrongMessage == "read")
+        {
+            console.log("222");
+            var a = document.getElementById("fail_read");
+            var b = document.getElementById("fail_jump");
+            a.style.display="block";
+            b.style.display="block";
+        }
+
+    }
+
+
+</script>
+
 </body>
 </html>

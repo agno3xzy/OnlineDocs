@@ -8,6 +8,7 @@ public class ShareAction {
     private String docName;
     private String authority;
     private String path;
+    private String isResultVis;
 
     public void setDocName(String docName) {
         this.docName = docName;
@@ -22,6 +23,10 @@ public class ShareAction {
     public void setPath(String path){this.path = path;}
 
     public String getPath(){return this.path;}
+
+    public void setIsResultVis(String isResultVis){this.isResultVis = isResultVis;}
+
+    public String getIsResultVis(){return this.isResultVis;}
 
     public String execute()
     {
