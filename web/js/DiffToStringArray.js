@@ -367,8 +367,8 @@ function timeUpdate() {
             }
         }
     }
-    //console.log(result);
-    //console.log(diff);
+    console.log(result);
+    console.log(diff);
     var xhr = new XMLHttpRequest();
     var urlString = "handleConflict.action?";
     var args="username=" + document.getElementById("username").innerHTML
@@ -383,16 +383,16 @@ function timeUpdate() {
 
     //检查响应状态
     xhr.onreadystatechange = function() {
-        //console.log("xhr.readyState"+xhr.readyState);
+        console.log("xhr.readyState"+xhr.readyState);
         if(xhr.readyState == 4) {
-            //console.log("xhr.status"+xhr.status);
+            console.log("xhr.status"+xhr.status);
             if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
                 //更新文档
                 quill.setText(xhr.responseText);
                 // 设置光标位置
                 quill.setSelection(pos);
                 content=document.getElementById('editor-container').children[0].innerHTML;
-                //console.log("xhr.responseText"+xhr.responseText);
+                console.log("xhr.responseText"+xhr.responseText);
                 //console.log(xhr.responseText);
                 //console.log(document.getElementById("password").value);
             }

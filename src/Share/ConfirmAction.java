@@ -12,6 +12,12 @@ public class ConfirmAction {
     private String userID;
     private String docID;
     private String authority;
+    private String username;
+    private String wrongMessage;
+
+    public String getUsername(){return username;}
+
+    public void setUsername(String username){this.username = username;}
 
     public String getUserID(){return this.userID;}
 
@@ -25,6 +31,9 @@ public class ConfirmAction {
 
     public void setAuthority(String authority){this.authority=authority;}
 
+    public String getWrongMessage(){return this.wrongMessage;}
+
+    public void setWrongMessage(String wrongMessage){this.wrongMessage = wrongMessage;}
 
     public String execute()
     {
@@ -44,16 +53,22 @@ public class ConfirmAction {
                     Statement s1 = conn.createStatement();
                     String str1 = "read";
                     s1.execute("insert into cooperate values"+"("+"'" + str1+"'"+","+"'"+userID+"'"+","+"'"+docID+"'"+")");
+                    dao.close(s1);
+                    dao.close(rs3,p3);
                     return SUCCESS;
                 }
                 else {
                     curPermission = rs3.getString("permission");
                     if(curPermission.equals("read"))
                     {
+                        wrongMessage = "read";
+                        dao.close(rs3,p3);
                         return "alreadyHasRead";
                     }
                     else
                     {
+                        wrongMessage = "share";
+                        dao.close(rs3,p3);
                         return "alreadyHasShare";
                     }
                 }
@@ -67,7 +82,9 @@ public class ConfirmAction {
                 if(hasRes == false)
                 {
                     Statement s2 = conn.createStatement();
-                    s2.execute("insert into cooperate values"+"(" + "share"+","+userID+","+docID+")");
+                    s2.execute("insert into cooperate values"+"(" + "'share'"+","+userID+","+docID+")");
+                    dao.close(s2);
+                    dao.close(rs4,p4);
                     return SUCCESS;
                 }
                 else
@@ -77,7 +94,9 @@ public class ConfirmAction {
                     if(curPermission==null)
                     {
                         Statement s2 = conn.createStatement();
-                        s2.execute("insert into cooperate values"+"(" + "share"+","+userID+","+docID+")");
+                        s2.execute("insert into cooperate values"+"(" + "'share'"+","+userID+","+docID+")");
+                        dao.close(s2);
+                        dao.close(rs4,p4);
                         return SUCCESS;
                     }
 
@@ -85,11 +104,14 @@ public class ConfirmAction {
                     {
                         Statement s2 = conn.createStatement();
                         s2.execute("update  cooperate set permission ="+"'"+ "share"+"'"+"where document_iddocument='" + docID + "'"+"and user_iduser='"+userID +"'");
+                        dao.close(s2);
+                        dao.close(rs4,p4);
                         return SUCCESS;
                     }
 
                     else
                     {
+                        wrongMessage = "share";
                         return "alreadyHasShare";
                     }
 

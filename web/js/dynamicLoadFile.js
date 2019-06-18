@@ -75,12 +75,6 @@ function dynamic(){
             "<input type='text' style ='display:none' name='path' value='"+fpathList_coop[i]+"'>"+
             "<button type='submit' class='btn btn-success ' style='margin-top:15px;margin-right: 15px;'>下载</button>"+
             "</form>"+
-            "<form action= 'deleteAction'  enctype='multipart/form-data' method='post'>"+
-            "<input type='text' style ='display:none' name='username' value='"+username+"'>"+
-            "<input type='text' style ='display:none' name='oldPath' value='"+oldPath+"'>"+
-            "<input type='text' style ='display:none' name='newPath' value='"+newPath+"'>"+
-            "<button type='submit' class='btn btn-danger ' style='margin-top:15px;margin-right: 15px;'>删除</button>"+
-            "</form>"+
             "</div>"
     }
 }
